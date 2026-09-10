@@ -1,0 +1,2326 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="description"
+        content="Q-TEN Trading & General Services - Company registration, PRO services, translation, attestation and business support in Qatar.">
+
+  <title>Q-TEN | Trading & General Services</title>
+
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <!-- Bootstrap Icons -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    rel="stylesheet"
+  >
+
+  <!-- Arabic web font (used when Arabic is selected) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Q-TEN Stylesheet -->
+  <link
+    href="css/style.css"
+    rel="stylesheet"
+  >
+
+  <!-- ============================================================
+       LANGUAGE SWITCHER STYLES
+       A slim utility bar pinned to the very top of the viewport,
+       above the hero. This keeps it clear of anything baked into
+       the hero artwork (e.g. the "GET A QUOTE" graphic) at any
+       screen width, since it never overlaps the image at all.
+       ============================================================ -->
+  <style>
+    :root {
+      --lang-bar-h: 42px;
+    }
+
+    body {
+      padding-top: var(--lang-bar-h);
+    }
+
+    .lang-topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 2100;
+
+      height: var(--lang-bar-h);
+
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      padding: 0 20px;
+
+      background: linear-gradient(90deg, #043b47, #087f8c 55%, #0a94a1);
+      box-shadow: 0 4px 18px rgba(4, 59, 71, 0.25);
+    }
+
+    .lang-switcher {
+      position: relative;
+    }
+
+    .lang-switcher .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px;
+
+      padding: 6px 14px 6px 8px;
+
+      background: rgba(255, 255, 255, 0.10);
+
+      cursor: pointer;
+
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .lang-switcher .lang-toggle:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .lang-switcher .lang-toggle:active {
+      transform: scale(0.97);
+    }
+
+    .lang-switcher .lang-toggle .lang-icon {
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+
+      color: #043b47;
+      font-size: 12px;
+
+      border-radius: 50%;
+      background: linear-gradient(135deg, #eafcfd, #cdeff2);
+
+      flex: 0 0 auto;
+    }
+
+    .lang-switcher .lang-toggle .lang-current {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .lang-switcher .lang-toggle .lang-chevron {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.85);
+      transition: transform 0.25s ease;
+    }
+
+    .lang-switcher.open .lang-toggle .lang-chevron {
+      transform: rotate(180deg);
+    }
+
+    .lang-switcher .lang-menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+
+      min-width: 168px;
+
+      list-style: none;
+      margin: 0;
+      padding: 7px;
+
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid rgba(8, 127, 140, 0.12);
+      border-radius: 14px;
+
+      box-shadow:
+        0 20px 45px rgba(4, 59, 71, 0.25),
+        0 4px 14px rgba(4, 59, 71, 0.10);
+
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px) scale(0.97);
+      transform-origin: top right;
+
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s cubic-bezier(.2,.8,.2,1),
+        visibility 0.2s ease;
+    }
+
+    .lang-switcher.open .lang-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .lang-switcher .lang-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+
+      width: 100%;
+      border: none;
+      background: transparent;
+
+      padding: 9px 11px;
+      border-radius: 10px;
+
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #043b47;
+      text-align: left;
+
+      cursor: pointer;
+
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+
+    .lang-switcher .lang-option[data-lang="ar"] {
+      font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+      text-align: right;
+    }
+
+    .lang-switcher .lang-option:hover {
+      background: rgba(8, 127, 140, 0.08);
+    }
+
+    .lang-switcher .lang-option.active {
+      color: #087f8c;
+      background: rgba(8, 127, 140, 0.10);
+    }
+
+    .lang-switcher .lang-option .lang-check {
+      font-size: 12px;
+      color: #087f8c;
+      opacity: 0;
+      transition: opacity 0.18s ease;
+    }
+
+    .lang-switcher .lang-option.active .lang-check {
+      opacity: 1;
+    }
+
+    html[dir="rtl"] body {
+      font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+      text-align: right;
+    }
+
+    html[dir="rtl"] .lang-switcher .lang-toggle {
+      padding: 6px 8px 6px 14px;
+    }
+
+    html[dir="rtl"] ul {
+      padding-right: 1.1rem;
+      padding-left: 0;
+    }
+
+    @media (max-width: 575.98px) {
+      :root {
+        --lang-bar-h: 38px;
+      }
+
+      .lang-topbar {
+        padding: 0 12px;
+      }
+
+      .lang-switcher .lang-toggle {
+        padding: 5px 11px 5px 6px;
+        gap: 6px;
+      }
+
+      .lang-switcher .lang-toggle .lang-icon {
+        width: 19px;
+        height: 19px;
+        font-size: 10px;
+      }
+
+      .lang-switcher .lang-toggle .lang-current {
+        font-size: 0.72rem;
+      }
+
+      .lang-switcher .lang-menu {
+        min-width: 148px;
+      }
+    }
+  </style>
+
+</head>
+
+
+<body>
+
+<!-- ============================================================
+     LANGUAGE SWITCHER (English / Arabic)
+     Fixed to the top-right of the site, independent of the hero
+     block below so the hero markup stays untouched.
+     ============================================================ -->
+
+<!-- ============================================================
+     LANGUAGE TOP BAR (English / Arabic)
+     A slim full-width bar fixed to the very top of the viewport,
+     above the hero. Independent of the hero markup below so the
+     hero itself stays untouched.
+     ============================================================ -->
+
+<div class="lang-topbar">
+
+  <div class="lang-switcher" role="group" aria-label="Language selector">
+
+    <button
+      type="button"
+      class="lang-toggle"
+      id="langToggle"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      <span class="lang-icon" aria-hidden="true">
+        <i class="bi bi-globe2"></i>
+      </span>
+      <span class="lang-current" id="langCurrent">English</span>
+      <span class="lang-chevron" aria-hidden="true">
+        <i class="bi bi-chevron-down"></i>
+      </span>
+    </button>
+
+    <ul class="lang-menu" id="langMenu" role="menu">
+
+      <li role="none">
+        <button type="button" class="lang-option active" data-lang="en" role="menuitemradio" aria-checked="true">
+          <span>English</span>
+          <i class="bi bi-check-lg lang-check"></i>
+        </button>
+      </li>
+
+      <li role="none">
+        <button type="button" class="lang-option" data-lang="ar" role="menuitemradio" aria-checked="false">
+          <span>العربية</span>
+          <i class="bi bi-check-lg lang-check"></i>
+        </button>
+      </li>
+
+    </ul>
+
+  </div>
+
+</div>
+
+
+<!-- ============================================================
+     HERO
+     DO NOT CHANGE
+     ============================================================ -->
+
+<header class="hero" id="home">
+
+  <img
+    class="hero-art"
+    src="assets/qten-home-reference.png"
+    data-en-src="assets/qten-home-reference.png"
+    data-ar-src="assets/arabic.png"
+    alt="Q-TEN Trading & General Services homepage"
+  >
+
+  <nav
+    class="hero-links"
+    aria-label="Main navigation"
+  >
+
+    <a
+      href="#home"
+      class="home-link"
+      aria-label="Home">
+    </a>
+
+    <a
+      href="#about"
+      class="about-link"
+      aria-label="About Us">
+    </a>
+
+    <a
+      href="#services"
+      class="services-link"
+      aria-label="Services">
+    </a>
+
+    <a
+      href="#industries"
+      class="industries-link"
+      aria-label="Industries">
+    </a>
+
+    <a
+      href="#why-us"
+      class="why-link"
+      aria-label="Why Us">
+    </a>
+
+    <a
+      href="#contact"
+      class="contact-link"
+      aria-label="Contact Us">
+    </a>
+
+    <a
+      href="#contact"
+      class="quote-link"
+      aria-label="Get a Quote">
+    </a>
+
+    <a
+      href="#services"
+      class="explore-link"
+      aria-label="Explore Our Services">
+    </a>
+
+  </nav>
+
+</header>
+
+
+<!-- ============================================================
+     VALUE STRIP
+     ============================================================ -->
+
+<section class="value-strip">
+
+  <div class="container">
+
+    <div class="row g-0">
+
+      <div class="col-md-6 col-lg-3">
+
+        <div class="value-item">
+
+          <i class="bi bi-building"></i>
+
+          <div>
+
+            <h3 data-en="Company Registration" data-ar="تسجيل الشركات">
+              Company Registration
+            </h3>
+
+            <p data-en="Assistance with company formation and registration requirements in Qatar." data-ar="المساعدة في تأسيس الشركات واستيفاء متطلبات التسجيل في قطر.">
+              Assistance with company formation and registration
+              requirements in Qatar.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-md-6 col-lg-3">
+
+        <div class="value-item">
+
+          <i class="bi bi-file-earmark-text"></i>
+
+          <div>
+
+            <h3 data-en="Document Services" data-ar="خدمات المستندات">
+              Document Services
+            </h3>
+
+            <p data-en="Translation, attestation and documentation support for individuals and businesses." data-ar="دعم الترجمة والتصديق والمستندات للأفراد والشركات.">
+              Translation, attestation and documentation support
+              for individuals and businesses.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-md-6 col-lg-3">
+
+        <div class="value-item">
+
+          <i class="bi bi-person-badge"></i>
+
+          <div>
+
+            <h3 data-en="PRO Services" data-ar="خدمات العلاقات العامة (PRO)">
+              PRO Services
+            </h3>
+
+            <p data-en="Professional public relations and government-service assistance in Qatar." data-ar="مساعدة احترافية في العلاقات العامة والخدمات الحكومية في قطر.">
+              Professional public relations and government-service
+              assistance in Qatar.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-md-6 col-lg-3">
+
+        <div class="value-item">
+
+          <i class="bi bi-people"></i>
+
+          <div>
+
+            <h3 data-en="Business Support" data-ar="دعم الأعمال">
+              Business Support
+            </h3>
+
+            <p data-en="Support for both small and large enterprises and legal entities." data-ar="دعم للمؤسسات الصغيرة والكبيرة والكيانات القانونية.">
+              Support for both small and large enterprises
+              and legal entities.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+
+<section
+  id="about"
+  class="section about-section"
+>
+
+  <div class="container">
+
+    <div class="row align-items-center g-5">
+
+      <div class="col-lg-6">
+
+        <span class="eyebrow" data-en="WELCOME TO Q-TEN" data-ar="مرحبًا بكم في كيو-تين">
+          WELCOME TO Q-TEN
+        </span>
+
+        <h2 data-en="Your Partner for Business in Qatar" data-ar="شريككم في الأعمال بقطر">
+          Your Partner for Business in Qatar
+        </h2>
+
+        <p class="lead" data-en="Q-TEN Trading and General Service is an all-in-one business service center providing a wide range of legal services, including company registration in Qatar, translation, attestation, and professional PRO services management for both small and large enterprises, as well as legal entities in Qatar." data-ar="كيو-تين للتجارة والخدمات العامة هي مركز خدمات أعمال متكامل يقدم مجموعة واسعة من الخدمات القانونية، بما في ذلك تسجيل الشركات في قطر، والترجمة، والتصديق، وإدارة خدمات العلاقات العامة الاحترافية للمؤسسات الصغيرة والكبيرة، وكذلك الكيانات القانونية في قطر.">
+
+          Q-TEN Trading and General Service is an all-in-one
+          business service center providing a wide range of legal
+          services, including company registration in Qatar,
+          translation, attestation, and professional PRO services
+          management for both small and large enterprises, as well
+          as legal entities in Qatar.
+
+        </p>
+
+        <p data-en="With a strong presence in India and an extensive footprint in the Middle East, Q-TEN is focused on delivering high-quality corporate public relations services, assisting new and existing firms, and providing guidance for opening companies in Qatar and overseas." data-ar="بحضور قوي في الهند وانتشار واسع في الشرق الأوسط، تركز كيو-تين على تقديم خدمات علاقات عامة مؤسسية عالية الجودة، ومساعدة الشركات الجديدة والقائمة، وتقديم الإرشاد لفتح الشركات في قطر وخارجها.">
+
+          With a strong presence in India and an extensive footprint
+          in the Middle East, Q-TEN is focused on delivering
+          high-quality corporate public relations services,
+          assisting new and existing firms, and providing guidance
+          for opening companies in Qatar and overseas.
+
+        </p>
+
+        <a
+          href="#contact"
+          class="btn qten-btn"
+        >
+          <span data-en="Contact Q-TEN" data-ar="تواصل مع كيو-تين">Contact Q-TEN</span>
+          <i class="bi bi-arrow-right ms-2"></i>
+        </a>
+
+      </div>
+
+
+      <div class="col-lg-6">
+
+        <div class="brand-card">
+
+          <img
+            src="assets/qten-supplied-logo.jpg"
+            alt="Q-TEN supplied logo"
+            class="supplied-logo"
+          >
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ============================================================
+     COMPANY FORMATION
+     ============================================================ -->
+
+<section
+  id="formation"
+  class="section formation-section"
+>
+
+  <div class="container">
+
+    <div class="heading-center">
+
+      <span class="eyebrow" data-en="COMPANY FORMATION IN QATAR" data-ar="تأسيس الشركات في قطر">
+        COMPANY FORMATION IN QATAR
+      </span>
+
+      <h2 data-en="Build Your Business With the Right Setup" data-ar="أسّس عملك بالطريقة الصحيحة">
+        Build Your Business With the Right Setup
+      </h2>
+
+      <p data-en="Q-TEN provides assistance with company registration, business setup, Commercial Registration, bank account support and related requirements." data-ar="تقدم كيو-تين المساعدة في تسجيل الشركات، وتأسيس الأعمال، والسجل التجاري، ودعم فتح الحسابات البنكية والمتطلبات ذات الصلة.">
+        Q-TEN provides assistance with company registration,
+        business setup, Commercial Registration, bank account
+        support and related requirements.
+      </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+      <div class="col-lg-6">
+
+        <div class="info-card">
+
+          <h3 data-en="Company Formation in Qatar" data-ar="تأسيس الشركات في قطر">
+            Company Formation in Qatar
+          </h3>
+
+          <p data-en="Qatar is one of the strong economies in the world, with expanding business opportunities for foreigners to establish their presence by investing and starting a business." data-ar="تُعد قطر من الاقتصادات القوية في العالم، مع فرص أعمال متنامية للأجانب لتأسيس حضورهم من خلال الاستثمار وبدء الأعمال.">
+            Qatar is one of the strong economies in the world,
+            with expanding business opportunities for foreigners
+            to establish their presence by investing and starting
+            a business.
+          </p>
+
+          <p data-en="Business setup requirements can vary depending on the type of business entity. Q-TEN assists clients with the standard regulatory requirements needed to start and smoothly run a business in Qatar." data-ar="قد تختلف متطلبات تأسيس الأعمال باختلاف نوع الكيان التجاري. تساعد كيو-تين العملاء في استيفاء المتطلبات التنظيمية القياسية اللازمة لبدء الأعمال وإدارتها بسلاسة في قطر.">
+            Business setup requirements can vary depending on
+            the type of business entity. Q-TEN assists clients
+            with the standard regulatory requirements needed
+            to start and smoothly run a business in Qatar.
+          </p>
+
+          <p class="mb-0" data-en="Services include assistance with company registration, starting a business, obtaining Commercial Registration, opening a bank account and other services based on the type of company." data-ar="تشمل الخدمات المساعدة في تسجيل الشركات، وبدء الأعمال، والحصول على السجل التجاري، وفتح الحساب البنكي، وخدمات أخرى وفقًا لنوع الشركة.">
+            Services include assistance with company registration,
+            starting a business, obtaining Commercial Registration,
+            opening a bank account and other services based on
+            the type of company.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-lg-6">
+
+        <div class="info-card">
+
+          <h3 data-en="PRO Support for Business Setup" data-ar="دعم العلاقات العامة لتأسيس الأعمال">
+            PRO Support for Business Setup
+          </h3>
+
+          <p data-en="In addition to business setup, Q-TEN offers professional PRO (Public Relations Officer) services for:" data-ar="بالإضافة إلى تأسيس الأعمال، تقدم كيو-تين خدمات موظف العلاقات العامة (PRO) الاحترافية لكل من:">
+            In addition to business setup, Q-TEN offers
+            professional PRO (Public Relations Officer)
+            services for:
+          </p>
+
+          <ul>
+
+            <li data-en="Business approvals" data-ar="الموافقات التجارية">
+              Business approvals
+            </li>
+
+            <li data-en="License renewals" data-ar="تجديد التراخيص">
+              License renewals
+            </li>
+
+            <li data-en="Visa services" data-ar="خدمات التأشيرات">
+              Visa services
+            </li>
+
+            <li data-en="Municipality services" data-ar="خدمات البلدية">
+              Municipality services
+            </li>
+
+            <li data-en="Foreign affairs services in Qatar" data-ar="خدمات الشؤون الخارجية في قطر">
+              Foreign affairs services in Qatar
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="row g-4 mt-2">
+
+      <div class="col-md-6 col-lg-4">
+
+        <div class="info-card">
+
+          <h3 data-en="LLC Registration" data-ar="تسجيل الشركة ذات المسؤولية المحدودة">
+            LLC Registration
+          </h3>
+
+          <p data-en="Limited Liability Company (LLC) is described in the profile as the most common form of company registration in Qatar, with the ownership structure stated there as 51% Qatari and 49% expatriate investor." data-ar="تُوصف الشركة ذات المسؤولية المحدودة في الملف بأنها الشكل الأكثر شيوعًا لتسجيل الشركات في قطر، حيث يُشار فيه إلى هيكل الملكية بنسبة 51% لطرف قطري و49% للمستثمر الوافد.">
+            Limited Liability Company (LLC) is described in the
+            profile as the most common form of company registration
+            in Qatar, with the ownership structure stated there as
+            51% Qatari and 49% expatriate investor.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-md-6 col-lg-4">
+
+        <div class="info-card">
+
+          <h3 data-en="QFC 100% Incorporation" data-ar="التأسيس بنسبة 100% في مركز قطر للمال">
+            QFC 100% Incorporation
+          </h3>
+
+          <p data-en="Qatar Financial Centre (QFC) incorporation is presented as an option that allows 100% foreign ownership with a 10% corporate tax." data-ar="يُقدَّم التأسيس عبر مركز قطر للمال (QFC) كخيار يتيح ملكية أجنبية بنسبة 100% بضريبة شركات قدرها 10%.">
+            Qatar Financial Centre (QFC) incorporation is presented
+            as an option that allows 100% foreign ownership with
+            a 10% corporate tax.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-md-6 col-lg-4">
+
+        <div class="info-card">
+
+          <h3 data-en="100% Foreign Investment" data-ar="استثمار أجنبي بنسبة 100%">
+            100% Foreign Investment
+          </h3>
+
+          <p data-en="The profile lists specific activities where 100% foreign ownership may be available, including IT, health, tourism, manufacturing, agriculture and education." data-ar="يُدرج الملف أنشطة محددة قد تتوفر فيها الملكية الأجنبية بنسبة 100%، بما في ذلك تقنية المعلومات، والصحة، والسياحة، والتصنيع، والزراعة، والتعليم.">
+            The profile lists specific activities where 100%
+            foreign ownership may be available, including IT,
+            health, tourism, manufacturing, agriculture and education.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-md-6 col-lg-4">
+
+        <div class="info-card">
+
+          <h3 data-en="Foreign Company Branch" data-ar="فرع شركة أجنبية">
+            Foreign Company Branch
+          </h3>
+
+          <p data-en="Branch registration is described as useful when a business needs a presence in Qatar for national or international operational and logistical management." data-ar="يُوصف تسجيل الفرع بأنه مفيد عندما تحتاج الشركة إلى حضور في قطر لإدارة العمليات واللوجستيات على المستوى المحلي أو الدولي.">
+            Branch registration is described as useful when a
+            business needs a presence in Qatar for national or
+            international operational and logistical management.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-md-6 col-lg-4">
+
+        <div class="info-card">
+
+          <h3 data-en="Representative Office" data-ar="مكتب تمثيلي">
+            Representative Office
+          </h3>
+
+          <p data-en="Representative office registration is presented as a way for a foreign company to establish its presence in Qatar, with a shorter registration timeframe noted in the profile." data-ar="يُقدَّم تسجيل المكتب التمثيلي كوسيلة لشركة أجنبية لتأسيس حضورها في قطر، مع فترة تسجيل أقصر كما هو مذكور في الملف.">
+            Representative office registration is presented as
+            a way for a foreign company to establish its presence
+            in Qatar, with a shorter registration timeframe noted
+            in the profile.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ============================================================
+     SERVICES
+     ============================================================ -->
+
+<section
+  id="services"
+  class="section services-section"
+>
+
+  <div class="container">
+
+    <div class="heading-center">
+
+      <span class="eyebrow" data-en="Q-TEN SERVICES IN QATAR" data-ar="خدمات كيو-تين في قطر">
+        Q-TEN SERVICES IN QATAR
+      </span>
+
+      <h2 data-en="Complete Business & PRO Services" data-ar="خدمات أعمال وعلاقات عامة متكاملة">
+        Complete Business & PRO Services
+      </h2>
+
+      <p data-en="The website now reflects the service categories and individual services presented in the Q-TEN company profile." data-ar="يعكس الموقع الآن فئات الخدمات والخدمات الفردية الواردة في الملف التعريفي لشركة كيو-تين.">
+        The website now reflects the service categories and
+        individual services presented in the Q-TEN company profile.
+      </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+
+      <!-- Company Registration -->
+
+      <div class="col-md-6 col-lg-4">
+
+        <article class="service-card">
+
+          <div class="service-icon">
+            <i class="bi bi-building-add"></i>
+          </div>
+
+          <h3 data-en="Company Registration" data-ar="تسجيل الشركات">
+            Company Registration
+          </h3>
+
+          <p data-en="Business setup and registration support in Qatar." data-ar="دعم تأسيس وتسجيل الأعمال في قطر.">
+            Business setup and registration support in Qatar.
+          </p>
+
+          <ul>
+
+            <li data-en="Company registration in Qatar" data-ar="تسجيل الشركات في قطر">
+              Company registration in Qatar
+            </li>
+
+            <li data-en="Limited Liability Company in Qatar" data-ar="الشركة ذات المسؤولية المحدودة في قطر">
+              Limited Liability Company in Qatar
+            </li>
+
+            <li data-en="Find a Qatari partner" data-ar="إيجاد شريك قطري">
+              Find a Qatari partner
+            </li>
+
+            <li data-en="Trade representation office" data-ar="مكتب تمثيل تجاري">
+              Trade representation office
+            </li>
+
+            <li data-en="Free zone registration" data-ar="التسجيل في المنطقة الحرة">
+              Free zone registration
+            </li>
+
+          </ul>
+
+        </article>
+
+      </div>
+
+
+      <!-- Documents -->
+
+      <div class="col-md-6 col-lg-4">
+
+        <article class="service-card">
+
+          <div class="service-icon">
+            <i class="bi bi-translate"></i>
+          </div>
+
+          <h3 data-en="Document Services" data-ar="خدمات المستندات">
+            Document Services
+          </h3>
+
+          <p data-en="Support for document-related business and personal requirements." data-ar="دعم المتطلبات التجارية والشخصية المتعلقة بالمستندات.">
+            Support for document-related business and personal requirements.
+          </p>
+
+          <ul>
+
+            <li data-en="Documents translation" data-ar="ترجمة المستندات">
+              Documents translation
+            </li>
+
+            <li data-en="Translation services" data-ar="خدمات الترجمة">
+              Translation services
+            </li>
+
+            <li data-en="Attestation service" data-ar="خدمة التصديق">
+              Attestation service
+            </li>
+
+            <li data-en="Making Article of Association" data-ar="إعداد عقد التأسيس">
+              Making Article of Association
+            </li>
+
+            <li data-en="Auditing service" data-ar="خدمة التدقيق">
+              Auditing service
+            </li>
+
+          </ul>
+
+        </article>
+
+      </div>
+
+
+      <!-- Visa -->
+
+      <div class="col-md-6 col-lg-4">
+
+        <article class="service-card">
+
+          <div class="service-icon">
+            <i class="bi bi-person-vcard"></i>
+          </div>
+
+          <h3 data-en="Visa & Personal Services" data-ar="خدمات التأشيرات والخدمات الشخصية">
+            Visa & Personal Services
+          </h3>
+
+          <p data-en="Individual assistance for visa, residency and related procedures." data-ar="مساعدة فردية لإجراءات التأشيرات والإقامة وما يتعلق بها.">
+            Individual assistance for visa, residency and related procedures.
+          </p>
+
+          <ul>
+
+            <li data-en="Business visa in Qatar" data-ar="تأشيرة عمل في قطر">
+              Business visa in Qatar
+            </li>
+
+            <li data-en="Assistance in issuance of visas" data-ar="المساعدة في إصدار التأشيرات">
+              Assistance in issuance of visas
+            </li>
+
+            <li data-en="Visit visa to work/residency assistance" data-ar="المساعدة في تحويل تأشيرة الزيارة إلى عمل/إقامة">
+              Visit visa to work/residency assistance
+            </li>
+
+            <li data-en="Residency card services" data-ar="خدمات بطاقة الإقامة">
+              Residency card services
+            </li>
+
+            <li data-en="Renewal of residency" data-ar="تجديد الإقامة">
+              Renewal of residency
+            </li>
+
+          </ul>
+
+        </article>
+
+      </div>
+
+
+      <!-- Employment -->
+
+      <div class="col-md-6 col-lg-4">
+
+        <article class="service-card">
+
+          <div class="service-icon">
+            <i class="bi bi-briefcase"></i>
+          </div>
+
+          <h3 data-en="Employment & Agreements" data-ar="التوظيف والعقود">
+            Employment & Agreements
+          </h3>
+
+          <p data-en="Support for employment and commercial documentation." data-ar="دعم مستندات التوظيف والعقود التجارية.">
+            Support for employment and commercial documentation.
+          </p>
+
+          <ul>
+
+            <li data-en="Employment contract" data-ar="عقد العمل">
+              Employment contract
+            </li>
+
+            <li data-en="Rental agreement" data-ar="عقد الإيجار">
+              Rental agreement
+            </li>
+
+            <li data-en="Sale agreement" data-ar="عقد البيع">
+              Sale agreement
+            </li>
+
+            <li data-en="Assistance with legal contracts" data-ar="المساعدة في العقود القانونية">
+              Assistance with legal contracts
+            </li>
+
+            <li data-en="Labour contract services" data-ar="خدمات عقود العمل">
+              Labour contract services
+            </li>
+
+          </ul>
+
+        </article>
+
+      </div>
+
+
+      <!-- Business -->
+
+      <div class="col-md-6 col-lg-4">
+
+        <article class="service-card">
+
+          <div class="service-icon">
+            <i class="bi bi-credit-card"></i>
+          </div>
+
+          <h3 data-en="Business Support" data-ar="دعم الأعمال">
+            Business Support
+          </h3>
+
+          <p data-en="Additional business and administrative services." data-ar="خدمات أعمال وإدارية إضافية.">
+            Additional business and administrative services.
+          </p>
+
+          <ul>
+
+            <li data-en="Online bill payment" data-ar="سداد الفواتير إلكترونيًا">
+              Online bill payment
+            </li>
+
+            <li data-en="Business visa" data-ar="تأشيرة عمل">
+              Business visa
+            </li>
+
+            <li data-en="Auditing service" data-ar="خدمة التدقيق">
+              Auditing service
+            </li>
+
+            <li data-en="Trade representation office" data-ar="مكتب تمثيل تجاري">
+              Trade representation office
+            </li>
+
+            <li data-en="Qatari partner support" data-ar="دعم إيجاد الشريك القطري">
+              Qatari partner support
+            </li>
+
+          </ul>
+
+        </article>
+
+      </div>
+
+
+      <!-- Traffic -->
+
+      <div class="col-md-6 col-lg-4">
+
+        <article class="service-card">
+
+          <div class="service-icon">
+            <i class="bi bi-car-front"></i>
+          </div>
+
+          <h3 data-en="Traffic Services" data-ar="خدمات المرور">
+            Traffic Services
+          </h3>
+
+          <p data-en="Traffic-related assistance listed in the company profile." data-ar="مساعدة متعلقة بالمرور مذكورة في الملف التعريفي للشركة.">
+            Traffic-related assistance listed in the company profile.
+          </p>
+
+          <ul>
+
+            <li data-en="Car technical examination" data-ar="الفحص الفني للسيارة">
+              Car technical examination
+            </li>
+
+            <li data-en="Renewal of car form" data-ar="تجديد استمارة السيارة">
+              Renewal of car form
+            </li>
+
+            <li data-en="Renewal of driving license" data-ar="تجديد رخصة القيادة">
+              Renewal of driving license
+            </li>
+
+            <li data-en="Transfer of car ownership" data-ar="نقل ملكية السيارة">
+              Transfer of car ownership
+            </li>
+
+            <li data-en="Truck passing permission" data-ar="تصريح مرور الشاحنات">
+              Truck passing permission
+            </li>
+
+            <li data-en="Parking license" data-ar="رخصة موقف سيارات">
+              Parking license
+            </li>
+
+          </ul>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ============================================================
+     PERSONAL PRO SERVICES
+     ============================================================ -->
+
+<section
+  class="section personal-pro-section"
+>
+
+  <div class="container">
+
+    <div class="row align-items-end mb-5">
+
+      <div class="col-lg-7">
+
+        <span class="eyebrow" data-en="PERSONAL PRO SERVICES" data-ar="خدمات العلاقات العامة الشخصية">
+          PERSONAL PRO SERVICES
+        </span>
+
+        <h2 data-en="Assistance for Individuals & Families" data-ar="مساعدة للأفراد والعائلات">
+          Assistance for Individuals & Families
+        </h2>
+
+      </div>
+
+      <div class="col-lg-5">
+
+        <p class="mb-0" data-en="Q-TEN's profile lists PRO assistance for parents, wife, children, house drivers, housemaids and other personal requirements." data-ar="يُدرج ملف كيو-تين المساعدة في خدمات العلاقات العامة للوالدين والزوجة والأبناء وسائقي المنازل والعاملات المنزليات ومتطلبات شخصية أخرى.">
+
+          Q-TEN's profile lists PRO assistance for parents,
+          wife, children, house drivers, housemaids and other
+          personal requirements.
+
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="row g-4">
+
+
+      <!-- Personal Support -->
+
+      <div class="col-md-6 col-lg-4">
+
+        <div class="category-card">
+
+          <div class="small-title" data-en="PERSONAL SUPPORT" data-ar="الدعم الشخصي">
+            PERSONAL SUPPORT
+          </div>
+
+          <h3 data-en="Government & Documentation" data-ar="الحكومة والمستندات">
+            Government & Documentation
+          </h3>
+
+          <ul>
+
+            <li data-en="Legal contracts" data-ar="العقود القانونية">
+              Legal contracts
+            </li>
+
+            <li data-en="Medical commission" data-ar="اللجنة الطبية">
+              Medical commission
+            </li>
+
+            <li data-en="Fingerprint assistance" data-ar="المساعدة في بصمة الإصبع">
+              Fingerprint assistance
+            </li>
+
+            <li data-en="Blood type process" data-ar="إجراءات فصيلة الدم">
+              Blood type process
+            </li>
+
+            <li data-en="Residency card issuance" data-ar="إصدار بطاقة الإقامة">
+              Residency card issuance
+            </li>
+
+            <li data-en="Residency renewal" data-ar="تجديد الإقامة">
+              Residency renewal
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <!-- Household -->
+
+      <div class="col-md-6 col-lg-4">
+
+        <div class="category-card">
+
+          <div class="small-title" data-en="HOUSEHOLD SUPPORT" data-ar="دعم المنزل">
+            HOUSEHOLD SUPPORT
+          </div>
+
+          <h3 data-en="Housemaid & Family Services" data-ar="خدمات العاملة المنزلية والعائلة">
+            Housemaid & Family Services
+          </h3>
+
+          <ul>
+
+            <li data-en="Assistance in housemaid process" data-ar="المساعدة في إجراءات العاملة المنزلية">
+              Assistance in housemaid process
+            </li>
+
+            <li data-en="Housemaid nationality amendment/modification" data-ar="تعديل جنسية العاملة المنزلية">
+              Housemaid nationality amendment/modification
+            </li>
+
+            <li data-en="Personal Arabic speaker/translator assistance" data-ar="مساعدة مترجم/متحدث عربية شخصي">
+              Personal Arabic speaker/translator assistance
+            </li>
+
+            <li data-en="Visa-related assistance" data-ar="مساعدة متعلقة بالتأشيرة">
+              Visa-related assistance
+            </li>
+
+            <li data-en="Transfer of sponsorship" data-ar="نقل الكفالة">
+              Transfer of sponsorship
+            </li>
+
+            <li data-en="Secondment" data-ar="الإعارة">
+              Secondment
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <!-- Electronic -->
+
+      <div class="col-md-6 col-lg-4">
+
+        <div class="category-card">
+
+          <div class="small-title" data-en="ELECTRONIC SUPPORT" data-ar="الدعم الإلكتروني">
+            ELECTRONIC SUPPORT
+          </div>
+
+          <h3 data-en="Appointment & Process Assistance" data-ar="المساعدة في المواعيد والإجراءات">
+            Appointment & Process Assistance
+          </h3>
+
+          <ul>
+
+            <li data-en="Medical commission electronic appointment booking" data-ar="حجز موعد إلكتروني للجنة الطبية">
+              Medical commission electronic appointment booking
+            </li>
+
+            <li data-en="Fingerprint process assistance" data-ar="المساعدة في إجراءات بصمة الإصبع">
+              Fingerprint process assistance
+            </li>
+
+            <li data-en="Fingerprint assistance for highly qualified visa holders" data-ar="مساعدة بصمة الإصبع لحاملي التأشيرة ذات الكفاءة العالية">
+              Fingerprint assistance for highly qualified visa holders
+            </li>
+
+            <li data-en="Visit visa to work/residency assistance" data-ar="المساعدة في تحويل تأشيرة الزيارة إلى عمل/إقامة">
+              Visit visa to work/residency assistance
+            </li>
+
+            <li data-en="Issuance of residency cards" data-ar="إصدار بطاقات الإقامة">
+              Issuance of residency cards
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ============================================================
+     CORPORATE PRO SERVICES
+     ============================================================ -->
+
+<section
+  class="section corporate-pro-section"
+>
+
+  <div class="container">
+
+    <div class="heading-center">
+
+      <span class="eyebrow" data-en="PRO CORPORATE SERVICES" data-ar="خدمات العلاقات العامة للشركات">
+        PRO CORPORATE SERVICES
+      </span>
+
+      <h2 data-en="Support for Companies & Employers" data-ar="دعم الشركات وأصحاب العمل">
+        Support for Companies & Employers
+      </h2>
+
+      <p data-en="Corporate PRO services listed in the Q-TEN profile." data-ar="خدمات العلاقات العامة للشركات المدرجة في ملف كيو-تين.">
+        Corporate PRO services listed in the Q-TEN profile.
+      </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+
+      <!-- ======================================================
+           COMPANY REGISTRATION
+           ====================================================== -->
+
+      <div class="col-lg-6">
+
+        <div class="category-card">
+
+          <div class="small-title" data-en="COMMERCIAL REGISTRY & LICENSE" data-ar="السجل التجاري والرخصة">
+            COMMERCIAL REGISTRY & LICENSE
+          </div>
+
+          <h3 data-en="Company Registration & License Support" data-ar="دعم تسجيل الشركات والتراخيص">
+            Company Registration & License Support
+          </h3>
+
+          <ul>
+
+            <li data-en="Company foundation and establishment for different company types" data-ar="تأسيس الشركة لمختلف أنواع الكيانات">
+              Company foundation and establishment for different company types
+            </li>
+
+            <li data-en="Renewal of Qatar Chamber of Industry and Commerce subscription" data-ar="تجديد اشتراك غرفة قطر للصناعة والتجارة">
+              Renewal of Qatar Chamber of Industry and Commerce subscription
+            </li>
+
+            <li data-en="Renewal of commercial registry" data-ar="تجديد السجل التجاري">
+              Renewal of commercial registry
+            </li>
+
+            <li data-en="Renewal of municipal license" data-ar="تجديد الرخصة البلدية">
+              Renewal of municipal license
+            </li>
+
+            <li data-en="Renewal of civil defense license" data-ar="تجديد رخصة الدفاع المدني">
+              Renewal of civil defense license
+            </li>
+
+            <li data-en="Transfer company headquarters to a new address" data-ar="نقل المقر الرئيسي للشركة إلى عنوان جديد">
+              Transfer company headquarters to a new address
+            </li>
+
+            <li data-en="Add or delete activities in commercial registry and municipal license" data-ar="إضافة أو حذف الأنشطة في السجل التجاري والرخصة البلدية">
+              Add or delete activities in commercial registry and municipal license
+            </li>
+
+            <li data-en="Add or delete authorized signatories in the commercial registry" data-ar="إضافة أو حذف المخولين بالتوقيع في السجل التجاري">
+              Add or delete authorized signatories in the commercial registry
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <!-- ======================================================
+           LABOUR
+           ====================================================== -->
+
+      <div class="col-lg-6">
+
+        <div class="category-card">
+
+          <div class="small-title" data-en="MINISTRY OF LABOR" data-ar="وزارة العمل">
+            MINISTRY OF LABOR
+          </div>
+
+          <h3 data-en="Labour & Manpower Services" data-ar="خدمات العمالة والقوى العاملة">
+            Labour & Manpower Services
+          </h3>
+
+          <ul>
+
+            <li data-en="Making and renewal of labour contracts" data-ar="إعداد وتجديد عقود العمل">
+              Making and renewal of labour contracts
+            </li>
+
+            <li data-en="Modify labour approvals" data-ar="تعديل موافقات العمل">
+              Modify labour approvals
+            </li>
+
+            <li data-en="Apply for new manpower" data-ar="طلب عمالة جديدة">
+              Apply for new manpower
+            </li>
+
+            <li data-en="Changing profession in Qatar ID" data-ar="تغيير المهنة في البطاقة الشخصية القطرية">
+              Changing profession in Qatar ID
+            </li>
+
+            <li data-en="Issuance of work permit for sponsored persons" data-ar="إصدار تصريح عمل للأشخاص المكفولين">
+              Issuance of work permit for sponsored persons
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <!-- ======================================================
+           TRAFFIC
+           ====================================================== -->
+
+      <div class="col-lg-6">
+
+        <div class="category-card">
+
+          <div class="small-title" data-en="TRAFFIC SERVICES" data-ar="خدمات المرور">
+            TRAFFIC SERVICES
+          </div>
+
+          <h3 data-en="Vehicle & Driving Support" data-ar="دعم المركبات والقيادة">
+            Vehicle & Driving Support
+          </h3>
+
+          <ul>
+
+            <li data-en="Car technical examination" data-ar="الفحص الفني للسيارة">
+              Car technical examination
+            </li>
+
+            <li data-en="Renewal of car form" data-ar="تجديد استمارة السيارة">
+              Renewal of car form
+            </li>
+
+            <li data-en="Renewal of driving license" data-ar="تجديد رخصة القيادة">
+              Renewal of driving license
+            </li>
+
+            <li data-en="Transfer of car ownership" data-ar="نقل ملكية السيارة">
+              Transfer of car ownership
+            </li>
+
+            <li data-en="Truck passing permission" data-ar="تصريح مرور الشاحنات">
+              Truck passing permission
+            </li>
+
+            <li data-en="Parking license for mechanic and coloring" data-ar="رخصة موقف للميكانيكي والتلوين">
+              Parking license for mechanic and coloring
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <!-- ======================================================
+           ADDITIONAL
+           ====================================================== -->
+
+      <div class="col-lg-6">
+
+        <div class="category-card">
+
+          <div class="small-title" data-en="ADDITIONAL SERVICES" data-ar="خدمات إضافية">
+            ADDITIONAL SERVICES
+          </div>
+
+          <h3 data-en="Business & Administrative Assistance" data-ar="المساعدة في الأعمال والإدارة">
+            Business & Administrative Assistance
+          </h3>
+
+          <ul>
+
+            <li data-en="Trade representation office support" data-ar="دعم مكتب التمثيل التجاري">
+              Trade representation office support
+            </li>
+
+            <li data-en="Documents translation" data-ar="ترجمة المستندات">
+              Documents translation
+            </li>
+
+            <li data-en="Attestation services" data-ar="خدمات التصديق">
+              Attestation services
+            </li>
+
+            <li data-en="Article of Association preparation" data-ar="إعداد عقد التأسيس">
+              Article of Association preparation
+            </li>
+
+            <li data-en="Auditing service" data-ar="خدمة التدقيق">
+              Auditing service
+            </li>
+
+            <li data-en="Online bill payment" data-ar="سداد الفواتير إلكترونيًا">
+              Online bill payment
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ============================================================
+     INDUSTRIES / SERVICE AREAS
+     ============================================================ -->
+
+<section
+  id="industries"
+  class="section industries-section"
+>
+
+  <div class="container">
+
+    <div class="row align-items-end mb-5">
+
+      <div class="col-lg-7">
+
+        <span class="eyebrow" data-en="OUR SERVICE AREAS" data-ar="مجالات خدماتنا">
+          OUR SERVICE AREAS
+        </span>
+
+        <h2 data-en="One Place for Multiple Business Needs" data-ar="وجهة واحدة لجميع احتياجات أعمالك">
+          One Place for Multiple Business Needs
+        </h2>
+
+      </div>
+
+      <div class="col-lg-5">
+
+        <p class="mb-0" data-en="From company formation and document services to PRO, visa and traffic support, Q-TEN brings multiple services together for clients in Qatar." data-ar="من تأسيس الشركات وخدمات المستندات إلى دعم العلاقات العامة والتأشيرات والمرور، تجمع كيو-تين خدمات متعددة لعملائها في قطر.">
+
+          From company formation and document services to PRO,
+          visa and traffic support, Q-TEN brings multiple
+          services together for clients in Qatar.
+
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="row g-3">
+
+
+      <div class="col-6 col-lg-3">
+
+        <div class="industry">
+
+          <i class="bi bi-building"></i>
+
+          <span data-en="Company Registration" data-ar="تسجيل الشركات">
+            Company Registration
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-6 col-lg-3">
+
+        <div class="industry">
+
+          <i class="bi bi-file-earmark-text"></i>
+
+          <span data-en="Documents & Translation" data-ar="المستندات والترجمة">
+            Documents & Translation
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-6 col-lg-3">
+
+        <div class="industry">
+
+          <i class="bi bi-person-badge"></i>
+
+          <span data-en="PRO Services" data-ar="خدمات العلاقات العامة">
+            PRO Services
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-6 col-lg-3">
+
+        <div class="industry">
+
+          <i class="bi bi-passport"></i>
+
+          <span data-en="Visa Services" data-ar="خدمات التأشيرات">
+            Visa Services
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-6 col-lg-3">
+
+        <div class="industry">
+
+          <i class="bi bi-briefcase"></i>
+
+          <span data-en="Employment Services" data-ar="خدمات التوظيف">
+            Employment Services
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-6 col-lg-3">
+
+        <div class="industry">
+
+          <i class="bi bi-car-front"></i>
+
+          <span data-en="Traffic Services" data-ar="خدمات المرور">
+            Traffic Services
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-6 col-lg-3">
+
+        <div class="industry">
+
+          <i class="bi bi-patch-check"></i>
+
+          <span data-en="Attestation" data-ar="التصديق">
+            Attestation
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-6 col-lg-3">
+
+        <div class="industry">
+
+          <i class="bi bi-credit-card"></i>
+
+          <span data-en="Online Bill Payment" data-ar="سداد الفواتير إلكترونيًا">
+            Online Bill Payment
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ============================================================
+     WHY Q-TEN
+     ============================================================ -->
+
+<section
+  id="why-us"
+  class="section why-section"
+>
+
+  <div class="container">
+
+    <div class="heading-center">
+
+      <span class="eyebrow" data-en="WHY Q-TEN" data-ar="لماذا كيو-تين">
+        WHY Q-TEN
+      </span>
+
+      <h2 data-en="A Practical Partner for Your Qatar Requirements" data-ar="شريك عملي لاحتياجاتكم في قطر">
+        A Practical Partner for Your Qatar Requirements
+      </h2>
+
+      <p data-en="The profile positions Q-TEN as an all-in-one business service center supporting new and existing firms as well as individuals." data-ar="يُقدّم الملف كيو-تين كمركز خدمات أعمال متكامل يدعم الشركات الجديدة والقائمة وكذلك الأفراد.">
+        The profile positions Q-TEN as an all-in-one business
+        service center supporting new and existing firms as
+        well as individuals.
+      </p>
+
+    </div>
+
+
+    <div class="row g-3">
+
+
+      <div class="col-md-6">
+
+        <div class="reason">
+
+          <i class="bi bi-check2-circle"></i>
+
+          <span data-en="All-in-one business service support" data-ar="دعم خدمات أعمال متكامل">
+            All-in-one business service support
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-md-6">
+
+        <div class="reason">
+
+          <i class="bi bi-check2-circle"></i>
+
+          <span data-en="Company registration and business setup assistance" data-ar="المساعدة في تسجيل الشركات وتأسيس الأعمال">
+            Company registration and business setup assistance
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-md-6">
+
+        <div class="reason">
+
+          <i class="bi bi-check2-circle"></i>
+
+          <span data-en="Professional PRO and government-service assistance" data-ar="مساعدة احترافية في العلاقات العامة والخدمات الحكومية">
+            Professional PRO and government-service assistance
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-md-6">
+
+        <div class="reason">
+
+          <i class="bi bi-check2-circle"></i>
+
+          <span data-en="Translation, attestation and document support" data-ar="دعم الترجمة والتصديق والمستندات">
+            Translation, attestation and document support
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-md-6">
+
+        <div class="reason">
+
+          <i class="bi bi-check2-circle"></i>
+
+          <span data-en="Personal and corporate service options" data-ar="خيارات خدمات شخصية ومؤسسية">
+            Personal and corporate service options
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-md-6">
+
+        <div class="reason">
+
+          <i class="bi bi-check2-circle"></i>
+
+          <span data-en="Support for new and existing businesses" data-ar="دعم للشركات الجديدة والقائمة">
+            Support for new and existing businesses
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ============================================================
+     CTA
+     ============================================================ -->
+
+<section
+  class="section cta-section"
+>
+
+  <div class="container">
+
+    <div class="cta-box text-center">
+
+      <span class="eyebrow" data-en="Q-TEN TRADING & GENERAL SERVICES" data-ar="كيو-تين للتجارة والخدمات العامة">
+        Q-TEN TRADING & GENERAL SERVICES
+      </span>
+
+      <h2 data-en="For Your Business Establishment in Qatar" data-ar="لتأسيس أعمالكم في قطر">
+        For Your Business Establishment in Qatar
+      </h2>
+
+      <p class="section-intro mx-auto mb-4" data-en="For your business establishment in Qatar, make sure you hire the best in the industry. Accelerate your journey to business success with Q-TEN Service." data-ar="لتأسيس أعمالكم في قطر، احرصوا على الاستعانة بالأفضل في المجال. سرّعوا رحلتكم نحو النجاح التجاري مع خدمات كيو-تين.">
+
+        For your business establishment in Qatar, make sure
+        you hire the best in the industry. Accelerate your
+        journey to business success with Q-TEN Service.
+
+      </p>
+
+      <a
+        href="#contact"
+        class="btn qten-btn"
+      >
+
+        <span data-en="Talk to Q-TEN" data-ar="تواصل مع كيو-تين">Talk to Q-TEN</span>
+
+        <i class="bi bi-arrow-right ms-2"></i>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+
+<section
+  id="contact"
+  class="contact-section section"
+>
+
+  <div class="container">
+
+    <div class="contact-grid">
+
+
+      <!-- Contact information -->
+
+      <div>
+
+        <span class="eyebrow light" data-en="CONTACT Q-TEN" data-ar="تواصل مع كيو-تين">
+          CONTACT Q-TEN
+        </span>
+
+        <h2 data-en="Let's Discuss Your Requirement" data-ar="لنناقش متطلباتكم">
+          Let's Discuss Your Requirement
+        </h2>
+
+        <p data-en="Contact Q-TEN Trading and General Services for company registration, PRO services, translation, attestation, visa-related assistance and other services listed in our company profile." data-ar="تواصلوا مع كيو-تين للتجارة والخدمات العامة لتسجيل الشركات، وخدمات العلاقات العامة، والترجمة، والتصديق، والمساعدة المتعلقة بالتأشيرات وغيرها من الخدمات المدرجة في ملفنا التعريفي.">
+
+          Contact Q-TEN Trading and General Services for company
+          registration, PRO services, translation, attestation,
+          visa-related assistance and other services listed in
+          our company profile.
+
+        </p>
+
+
+        <div class="contact-details">
+
+
+          <div>
+
+            <i class="bi bi-geo-alt"></i>
+
+            <span>
+              <strong data-en="Location:" data-ar="الموقع:">Location:</strong>
+              Doha, Qatar
+            </span>
+
+          </div>
+
+
+          <div>
+
+            <i class="bi bi-telephone"></i>
+
+            <span>
+              <strong data-en="Tel:" data-ar="هاتف:">Tel:</strong>
+              +974 335 666 10
+            </span>
+
+          </div>
+
+
+          <div>
+
+            <i class="bi bi-telephone"></i>
+
+            <span>
+              <strong data-en="Tel:" data-ar="هاتف:">Tel:</strong>
+              +974 665 22 188
+            </span>
+
+          </div>
+
+
+          <div>
+
+            <i class="bi bi-envelope"></i>
+
+            <span>
+              <strong data-en="Email:" data-ar="البريد الإلكتروني:">Email:</strong>
+              Q10qatar@gmail.com
+            </span>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- Contact form -->
+
+      <form
+        id="quoteForm"
+        class="contact-form"
+      >
+
+        <input
+          class="form-control"
+          name="name"
+          placeholder="Your name"
+          data-en-placeholder="Your name"
+          data-ar-placeholder="اسمك"
+          required
+        >
+
+        <input
+          class="form-control"
+          name="email"
+          type="email"
+          placeholder="Email address"
+          data-en-placeholder="Email address"
+          data-ar-placeholder="البريد الإلكتروني"
+          required
+        >
+
+        <input
+          class="form-control"
+          name="phone"
+          placeholder="Phone number"
+          data-en-placeholder="Phone number"
+          data-ar-placeholder="رقم الهاتف"
+        >
+
+
+        <select
+          class="form-control"
+          name="service"
+          required
+        >
+
+          <option value="" data-en="Select a service" data-ar="اختر خدمة">
+            Select a service
+          </option>
+
+          <option data-en="Company Registration" data-ar="تسجيل الشركات">
+            Company Registration
+          </option>
+
+          <option data-en="PRO Services" data-ar="خدمات العلاقات العامة">
+            PRO Services
+          </option>
+
+          <option data-en="Documents Translation" data-ar="ترجمة المستندات">
+            Documents Translation
+          </option>
+
+          <option data-en="Attestation Service" data-ar="خدمة التصديق">
+            Attestation Service
+          </option>
+
+          <option data-en="Visa Services" data-ar="خدمات التأشيرات">
+            Visa Services
+          </option>
+
+          <option data-en="Employment Services" data-ar="خدمات التوظيف">
+            Employment Services
+          </option>
+
+          <option data-en="Traffic Services" data-ar="خدمات المرور">
+            Traffic Services
+          </option>
+
+          <option data-en="Other" data-ar="أخرى">
+            Other
+          </option>
+
+        </select>
+
+
+        <textarea
+          class="form-control"
+          name="message"
+          rows="5"
+          placeholder="Tell us about your requirement"
+          data-en-placeholder="Tell us about your requirement"
+          data-ar-placeholder="أخبرنا عن متطلباتك"
+          required
+        ></textarea>
+
+
+        <!-- Honeypot field for spam-bots. Must stay hidden from real users. -->
+        <input
+          type="text"
+          name="website"
+          class="d-none"
+          tabindex="-1"
+          autocomplete="off"
+        >
+
+
+        <button
+          class="btn btn-light qten-btn"
+          type="submit"
+        >
+          <span data-en="Send Enquiry" data-ar="إرسال الاستفسار">Send Enquiry</span>
+        </button>
+
+
+        <div
+          id="formMessage"
+          class="form-message"
+        ></div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+
+<footer class="footer">
+
+  <div class="container">
+
+    <div class="footer-top">
+
+
+      <div>
+
+        <strong>
+          Q-TEN
+        </strong>
+
+        <span data-en="Trading & General Services" data-ar="التجارة والخدمات العامة">
+          Trading & General Services
+        </span>
+
+      </div>
+
+
+      <div class="footer-links">
+
+        <a href="#home" data-en="Home" data-ar="الرئيسية">
+          Home
+        </a>
+
+        <a href="#about" data-en="About" data-ar="من نحن">
+          About
+        </a>
+
+        <a href="#formation" data-en="Company Setup" data-ar="تأسيس الشركات">
+          Company Setup
+        </a>
+
+        <a href="#services" data-en="Services" data-ar="الخدمات">
+          Services
+        </a>
+
+        <a href="#industries" data-en="Service Areas" data-ar="مجالات الخدمة">
+          Service Areas
+        </a>
+
+        <a href="#why-us" data-en="Why Q-TEN" data-ar="لماذا كيو-تين">
+          Why Q-TEN
+        </a>
+
+        <a href="#contact" data-en="Contact" data-ar="تواصل معنا">
+          Contact
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <hr>
+
+
+    <div class="copyright">
+
+      <span data-en="Q-TEN Trading & General Services" data-ar="كيو-تين للتجارة والخدمات العامة">
+        &copy;
+        <span id="year"></span>
+        Q-TEN Trading & General Services
+      </span>
+
+      <span data-en="Doha, Qatar | All rights reserved." data-ar="الدوحة، قطر | جميع الحقوق محفوظة.">
+        Doha, Qatar
+        &nbsp; | &nbsp;
+        All rights reserved.
+      </span>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+<!-- ============================================================
+     BACK TO TOP
+     ============================================================ -->
+
+<button
+  id="backTop"
+  class="back-top"
+  aria-label="Back to top"
+>
+
+  <i class="bi bi-arrow-up"></i>
+
+</button>
+
+
+<!-- Bootstrap JS -->
+
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+<!-- Q-TEN Website JS -->
+
+<script src="js/script.js"></script>
+
+<!-- ============================================================
+     LANGUAGE SWITCHER LOGIC
+     Swaps every [data-en]/[data-ar] element's text and every
+     [data-en-placeholder]/[data-ar-placeholder] field's
+     placeholder, then flips the page direction for Arabic.
+     ============================================================ -->
+
+<script>
+  (function () {
+    var STORAGE_KEY = 'qten-lang';
+
+    var switcher = document.querySelector('.lang-switcher');
+    var toggle = document.getElementById('langToggle');
+    var menu = document.getElementById('langMenu');
+    var currentLabel = document.getElementById('langCurrent');
+
+    var LABELS = { en: 'English', ar: 'العربية' };
+
+    function closeMenu() {
+      switcher.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    function openMenu() {
+      switcher.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+
+    function applyLanguage(lang) {
+      var isArabic = lang === 'ar';
+
+      document.documentElement.setAttribute('lang', isArabic ? 'ar' : 'en');
+      document.documentElement.setAttribute('dir', isArabic ? 'rtl' : 'ltr');
+
+      document.querySelectorAll('[data-en]').forEach(function (el) {
+        var text = isArabic ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+        if (text !== null) {
+          el.textContent = text;
+        }
+      });
+
+      document.querySelectorAll('[data-en-placeholder]').forEach(function (el) {
+        var text = isArabic
+          ? el.getAttribute('data-ar-placeholder')
+          : el.getAttribute('data-en-placeholder');
+        if (text !== null) {
+          el.setAttribute('placeholder', text);
+        }
+      });
+
+      document.querySelectorAll('[data-en-src]').forEach(function (el) {
+        var src = isArabic ? el.getAttribute('data-ar-src') : el.getAttribute('data-en-src');
+        if (src) {
+          el.setAttribute('src', src);
+        }
+      });
+
+      document.querySelectorAll('.lang-option').forEach(function (opt) {
+        var active = opt.getAttribute('data-lang') === lang;
+        opt.classList.toggle('active', active);
+        opt.setAttribute('aria-checked', active ? 'true' : 'false');
+      });
+
+      currentLabel.textContent = LABELS[lang] || LABELS.en;
+
+      try {
+        window.localStorage.setItem(STORAGE_KEY, lang);
+      } catch (e) {
+        /* localStorage unavailable - language choice just won't persist */
+      }
+    }
+
+    toggle.addEventListener('click', function (event) {
+      event.stopPropagation();
+      if (switcher.classList.contains('open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    document.querySelectorAll('.lang-option').forEach(function (opt) {
+      opt.addEventListener('click', function () {
+        applyLanguage(opt.getAttribute('data-lang'));
+        closeMenu();
+      });
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!switcher.contains(event.target)) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closeMenu();
+      }
+    });
+
+    var savedLang = 'en';
+    try {
+      savedLang = window.localStorage.getItem(STORAGE_KEY) || 'en';
+    } catch (e) {
+      /* localStorage unavailable - default to English */
+    }
+
+    applyLanguage(savedLang);
+  })();
+</script>
+
+</body>
+</html>
