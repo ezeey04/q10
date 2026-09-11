@@ -1,281 +1,111 @@
 <?php
 
-/*
-============================================================
- Q-TEN ENQUIRY EMAIL HANDLER
- Sends website enquiries to:
-
- Q10qatar@gmail.com
-============================================================
-*/
-
-
-/* ----------------------------------------------------------
-   JSON RESPONSE
----------------------------------------------------------- */
-
 header('Content-Type: application/json; charset=UTF-8');
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-/* ----------------------------------------------------------
-   ONLY ACCEPT POST
----------------------------------------------------------- */
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-
-    http_response_code(405);
+function sendError($message, $code = 500)
+{
+    http_response_code($code);
 
     echo json_encode([
         'success' => false,
-        'message' => 'Invalid request method.'
+        'message' => $message
     ]);
 
     exit;
 }
 
+try {
 
-/* ----------------------------------------------------------
-   HONEYPOT SPAM CHECK
----------------------------------------------------------- */
+    require __DIR__ . '/PHPMailer/src/Exception.php';
+    require __DIR__ . '/PHPMailer/src/PHPMailer.php';
+    require __DIR__ . '/PHPMailer/src/SMTP.php';
 
-if (!empty($_POST['website'])) {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        sendError('Invalid request method.', 405);
+    }
+
+    if (!empty($_POST['website'])) {
+        echo json_encode([
+            'success' => true,
+            'message' => 'OK'
+        ]);
+        exit;
+    }
+
+    $name = trim($_POST['name'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $phone = trim($_POST['phone'] ?? '');
+    $service = trim($_POST['service'] ?? '');
+    $message = trim($_POST['message'] ?? '');
+
+    if ($name === '' || $email === '' || $service === '' || $message === '') {
+        sendError('Please fill in all required fields.', 400);
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        sendError('Please enter a valid email address.', 400);
+    }
+
+    $to = 'Q10qatar@gmail.com';
+    $fromEmail = 'info@qtenservice.com';
+    $fromName = 'Q-TEN Website';
+    $subject = 'New Enquiry - Q-TEN Website';
+
+    $emailBody =
+        "NEW ENQUIRY - Q-TEN WEBSITE\n" .
+        "====================================\n\n" .
+        "Name: " . $name . "\n" .
+        "Email: " . $email . "\n" .
+        "Phone: " . $phone . "\n" .
+        "Service: " . $service . "\n\n" .
+        "Message:\n" .
+        "------------------------------------\n" .
+        $message . "\n" .
+        "------------------------------------\n\n" .
+        "Submitted from: Q-TEN Website\n" .
+        "Website: https://qtenservice.com\n";
+
+    $mail = new PHPMailer(true);
+
+    $mail->isSMTP();
+    $mail->Host = 'smtp.hostinger.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'info@qtenservice.com';
+
+    // ENTER YOUR ACTUAL INFO@QTENSERVICE.COM PASSWORD HERE
+    $mail->Password = 'Qten@2022';
+
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mail->Port = 465;
+    $mail->CharSet = 'UTF-8';
+
+    $mail->setFrom($fromEmail, $fromName);
+    $mail->addAddress($to);
+    $mail->addReplyTo($email, $name);
+
+    $mail->isHTML(false);
+    $mail->Subject = $subject;
+    $mail->Body = $emailBody;
+
+    $mail->send();
 
     echo json_encode([
         'success' => true,
-        'message' => 'Thank you. Your enquiry has been received.'
+        'message' => 'Your enquiry has been sent successfully.'
     ]);
 
-    exit;
-}
-
-
-/* ----------------------------------------------------------
-   EMAIL SETTINGS
----------------------------------------------------------- */
-
-$to = 'Q10qatar@gmail.com';
-
-$subject = 'New Q-TEN Website Enquiry';
-
-
-/*
-IMPORTANT:
-
-Change this to an email address using YOUR OWN DOMAIN
-when your website is hosted.
-
-Example:
-
-$from = 'website@q-ten.com';
-
-Using the visitor's email as "From" can cause delivery
-problems and spam rejection.
-*/
-
-$from = 'website@yourdomain.com';
-
-
-/* ----------------------------------------------------------
-   GET FORM DATA
----------------------------------------------------------- */
-
-$name = isset($_POST['name'])
-    ? trim($_POST['name'])
-    : '';
-
-$email = isset($_POST['email'])
-    ? trim($_POST['email'])
-    : '';
-
-$phone = isset($_POST['phone'])
-    ? trim($_POST['phone'])
-    : '';
-
-$service = isset($_POST['service'])
-    ? trim($_POST['service'])
-    : '';
-
-$userMessage = isset($_POST['message'])
-    ? trim($_POST['message'])
-    : '';
-
-
-/* ----------------------------------------------------------
-   VALIDATION
----------------------------------------------------------- */
-
-if ($name === '') {
-
-    http_response_code(400);
-
-    echo json_encode([
-        'success' => false,
-        'message' => 'Please enter your name.'
-    ]);
-
-    exit;
-}
-
-
-if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-
-    http_response_code(400);
-
-    echo json_encode([
-        'success' => false,
-        'message' => 'Please enter a valid email address.'
-    ]);
-
-    exit;
-}
-
-
-if ($service === '') {
-
-    http_response_code(400);
-
-    echo json_encode([
-        'success' => false,
-        'message' => 'Please select a service.'
-    ]);
-
-    exit;
-}
-
-
-if ($userMessage === '') {
-
-    http_response_code(400);
-
-    echo json_encode([
-        'success' => false,
-        'message' => 'Please enter your requirement.'
-    ]);
-
-    exit;
-}
-
-
-/* ----------------------------------------------------------
-   SANITIZE HEADER VALUES
----------------------------------------------------------- */
-
-$name = preg_replace(
-    "/[\r\n]+/",
-    " ",
-    $name
-);
-
-$email = preg_replace(
-    "/[\r\n]+/",
-    "",
-    $email
-);
-
-$phone = preg_replace(
-    "/[\r\n]+/",
-    " ",
-    $phone
-);
-
-$service = preg_replace(
-    "/[\r\n]+/",
-    " ",
-    $service
-);
-
-
-/* ----------------------------------------------------------
-   EMAIL BODY
----------------------------------------------------------- */
-
-$emailBody = "";
-
-$emailBody .= "Q-TEN WEBSITE ENQUIRY";
-$emailBody .= "\n";
-$emailBody .= "====================================";
-$emailBody .= "\n\n";
-
-$emailBody .= "Name: ";
-$emailBody .= $name;
-$emailBody .= "\n";
-
-$emailBody .= "Email: ";
-$emailBody .= $email;
-$emailBody .= "\n";
-
-$emailBody .= "Phone: ";
-$emailBody .= ($phone !== '' ? $phone : 'Not provided');
-$emailBody .= "\n";
-
-$emailBody .= "Service: ";
-$emailBody .= $service;
-$emailBody .= "\n\n";
-
-$emailBody .= "Requirement:";
-$emailBody .= "\n";
-$emailBody .= "------------------------------------";
-$emailBody .= "\n";
-$emailBody .= $userMessage;
-$emailBody .= "\n";
-$emailBody .= "------------------------------------";
-$emailBody .= "\n\n";
-
-$emailBody .= "Submitted from Q-TEN website.";
-$emailBody .= "\n";
-
-
-/* ----------------------------------------------------------
-   EMAIL HEADERS
----------------------------------------------------------- */
-
-$headers = [];
-
-$headers[] =
-    'MIME-Version: 1.0';
-
-$headers[] =
-    'Content-Type: text/plain; charset=UTF-8';
-
-$headers[] =
-    'From: Q-TEN Website <' . $from . '>';
-
-$headers[] =
-    'Reply-To: ' . $email;
-
-
-/* ----------------------------------------------------------
-   SEND EMAIL
----------------------------------------------------------- */
-
-$sent = mail(
-    $to,
-    $subject,
-    $emailBody,
-    implode("\r\n", $headers)
-);
-
-
-/* ----------------------------------------------------------
-   RESPONSE
----------------------------------------------------------- */
-
-if ($sent) {
-
-    echo json_encode([
-        'success' => true,
-        'message' =>
-            'Thank you. Your enquiry has been sent successfully. We will contact you soon.'
-    ]);
-
-} else {
+} catch (\Throwable $e) {
 
     http_response_code(500);
 
     echo json_encode([
         'success' => false,
-        'message' =>
-            'The enquiry could not be sent right now. Please contact Q-TEN directly by phone or email.'
+        'message' => 'SERVER ERROR: ' . $e->getMessage()
     ]);
-
 }
+
+exit;
+?>

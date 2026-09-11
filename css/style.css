@@ -39,6 +39,8 @@
 html{
   scroll-behavior:smooth;
   scroll-padding-top:75px;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
 }
 
 body{
@@ -55,6 +57,8 @@ body{
     sans-serif;
   line-height:1.7;
   overflow-x:hidden;
+  overflow-wrap:break-word;
+  word-break:break-word;
 }
 
 body::selection{
@@ -102,6 +106,8 @@ img{
   position:absolute;
   display:block;
   pointer-events:auto;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:rgba(255,255,255,.18);
 }
 
 .home-link{
@@ -167,8 +173,14 @@ img{
 
 .mobile-nav{
   position:sticky;
-  top:0;
+  top:var(--lang-bar-h, 0px);
   z-index:1000;
+
+  display:none;
+
+  /* Kept in the stylesheet but unused: navigation now lives
+     on the hero image hotspots (.hero-links) at every screen
+     width instead of a separate bar. */
 
   background:rgba(4,59,71,.96);
 
@@ -227,12 +239,14 @@ img{
   transition:.25s ease;
 }
 
-.mobile-nav a:hover{
+.mobile-nav a:hover,
+.mobile-nav a:active{
   color:#fff;
   background:rgba(255,255,255,.055);
 }
 
-.mobile-nav a:hover::after{
+.mobile-nav a:hover::after,
+.mobile-nav a:active::after{
   transform:scaleX(1);
 }
 
@@ -1684,7 +1698,7 @@ h2{
 
   color:#fff;
 
-  font-size:34px;
+  font-size:clamp(24px,7vw,34px);
 
   font-weight:950;
 
@@ -1869,13 +1883,12 @@ h2{
 @media(max-width:767px){
 
   /*
-    Hero hotspots remain disabled on mobile,
-    matching the existing hero behavior.
+    Hero hotspots stay active on mobile: their positions are
+    set in percentages relative to .hero, and the hero image
+    itself scales with width:100%/height:auto, so the % values
+    track the visible buttons in the artwork at every screen
+    width without any extra markup.
   */
-
-  .hero-links{
-    display:none;
-  }
 
   .section{
     padding:72px 0;
@@ -2129,5 +2142,11 @@ h2{
     height:44px;
 
     font-size:20px;
+  }
+
+  .mobile-nav a{
+    font-size:9.5px;
+
+    padding:11px 3px;
   }
 }
