@@ -65,12 +65,16 @@
   <link href="css/style.css" rel="stylesheet">
 
   <!-- ============================================================
-       LANGUAGE SWITCHER STYLES
+       LANGUAGE SWITCHER + NAVBAR + HERO STYLES
        ============================================================ -->
 
   <style>
     :root {
       --lang-bar-h: 42px;
+      --nav-h: 84px;
+      --qten-teal-dark: #043b47;
+      --qten-teal: #087f8c;
+      --qten-nav-teal-mid: #0a94a1;
     }
 
     body {
@@ -274,6 +278,394 @@
     }
 
     /* ==========================================================
+       HERO + NAVBAR
+       ========================================================== */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-art {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(4, 59, 71, 0.55) 0%,
+        rgba(4, 59, 71, 0.15) var(--nav-h),
+        rgba(4, 59, 71, 0) 60%
+      );
+      pointer-events: none;
+    }
+
+    /* Top navigation */
+
+    .navbar-main {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+
+      padding: 16px 44px;
+    }
+
+    .navbar-brand-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .navbar-brand-mark {
+      display: grid;
+      place-items: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.85);
+      background: transparent;
+      flex: 0 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .navbar-brand-mark::after {
+      content: "";
+      position: absolute;
+      right: -10px;
+      bottom: -10px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #ffffff;
+    }
+
+    .navbar-brand-mark span {
+      position: relative;
+      z-index: 2;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #ffffff;
+    }
+
+    .navbar-brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+    }
+
+    .navbar-brand-text .brand-name {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+    }
+
+    .navbar-brand-text .brand-sub {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      color: rgba(255, 255, 255, 0.85);
+      margin-top: 2px;
+    }
+
+    .navbar-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar-links a {
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      color: rgba(255, 255, 255, 0.92);
+      text-decoration: none;
+      padding-bottom: 6px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .navbar-links a:hover,
+    .navbar-links a.active {
+      color: #ffffff;
+      border-bottom-color: #ffffff;
+    }
+
+    .navbar-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+
+      padding: 11px 22px;
+      border-radius: 999px;
+
+      background: #ffffff;
+      color: var(--qten-teal-dark);
+
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      text-decoration: none;
+
+      transition: background 0.2s ease, transform 0.15s ease;
+      flex: 0 0 auto;
+    }
+
+    .navbar-cta:hover {
+      background: #eafcfd;
+      color: var(--qten-teal-dark);
+      transform: translateY(-1px);
+    }
+
+    .navbar-toggler-custom {
+      display: none;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      width: 42px;
+      height: 42px;
+      color: #fff;
+      font-size: 1.1rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Hero content */
+
+    .hero-content {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      width: min(560px, 46%);
+      padding: 0 6% 4% 6%;
+      z-index: 10;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.08;
+      color: #ffffff;
+      margin: 0 0 22px 0;
+    }
+
+    .hero-content h1 .accent-line {
+      display: block;
+      color: #8fe3ea;
+    }
+
+    .hero-content .hero-desc {
+      font-size: 1.02rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.88);
+      max-width: 440px;
+      margin-bottom: 30px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+
+      padding: 14px 26px;
+      border-radius: 6px;
+
+      background: #ffffff;
+      color: var(--qten-teal-dark);
+
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-decoration: none;
+      text-transform: uppercase;
+
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+
+    .hero-cta:hover {
+      background: #eafcfd;
+      color: var(--qten-teal-dark);
+      transform: translateY(-2px);
+    }
+
+    /* Kept for accessible/legacy anchor targets over image art */
+    .hero-links {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .hero-links a {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      opacity: 0;
+    }
+
+    /*
+     * Hero content intentionally stays left-aligned and in its
+     * original position even when the page switches to Arabic
+     * (dir="rtl"). Only the text content changes language; the
+     * hero layout itself does not mirror.
+     */
+    html[dir="rtl"] .hero-content {
+      left: 0;
+      right: auto;
+      text-align: left;
+    }
+
+    html[dir="rtl"] .navbar-main {
+      flex-direction: row-reverse;
+    }
+
+    html[dir="rtl"] .navbar-links {
+      flex-direction: row-reverse;
+    }
+
+    html[dir="rtl"] .navbar-brand-link {
+      flex-direction: row-reverse;
+    }
+
+    @media (max-width: 991.98px) {
+
+      .navbar-links,
+      .navbar-cta {
+        display: none;
+      }
+
+      .navbar-toggler-custom {
+        display: flex;
+      }
+
+      .hero-content {
+        width: 100%;
+        padding: 0 7%;
+        background: linear-gradient(180deg, rgba(4,59,71,0) 0%, rgba(4,59,71,0.55) 40%, rgba(4,59,71,0.75) 100%);
+      }
+    }
+
+    @media (max-width: 575.98px) {
+
+      :root {
+        --lang-bar-h: 38px;
+        --nav-h: 70px;
+      }
+
+      .lang-topbar {
+        padding: 0 12px;
+      }
+
+      .lang-switcher .lang-toggle {
+        padding: 5px 11px 5px 6px;
+        gap: 6px;
+      }
+
+      .lang-switcher .lang-toggle .lang-icon {
+        width: 19px;
+        height: 19px;
+        font-size: 10px;
+      }
+
+      .lang-switcher .lang-toggle .lang-current {
+        font-size: 0.72rem;
+      }
+
+      .lang-switcher .lang-menu {
+        min-width: 148px;
+      }
+
+      .navbar-main {
+        padding: 12px 18px;
+      }
+
+      .navbar-brand-mark {
+        width: 42px;
+        height: 42px;
+      }
+
+      .navbar-brand-text .brand-name {
+        font-size: 1.05rem;
+      }
+
+      .navbar-brand-text .brand-sub {
+        font-size: 0.6rem;
+      }
+
+      .hero-content .hero-desc {
+        display: none;
+      }
+    }
+
+    /* Mobile dropdown menu */
+
+    .mobile-nav-menu {
+      display: none;
+      position: absolute;
+      top: calc(var(--nav-h) - 10px);
+      left: 18px;
+      right: 18px;
+      z-index: 25;
+
+      background: rgba(4, 59, 71, 0.97);
+      border-radius: 14px;
+      padding: 10px;
+      box-shadow: 0 20px 45px rgba(4, 59, 71, 0.35);
+    }
+
+    .mobile-nav-menu.open {
+      display: block;
+    }
+
+    .mobile-nav-menu a {
+      display: block;
+      padding: 12px 14px;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border-radius: 8px;
+    }
+
+    .mobile-nav-menu a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .mobile-nav-menu .mobile-quote {
+      margin-top: 6px;
+      text-align: center;
+      background: #ffffff;
+      color: var(--qten-teal-dark) !important;
+    }
+
+    /* ==========================================================
        FORM RESPONSE
        ========================================================== */
 
@@ -348,35 +740,256 @@
       font-size: 1rem;
       line-height: 1;
     }
+  </style>
+
+
+
+  <!-- Final responsive alignment fixes -->
+  <style>
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      padding-top: var(--lang-bar-h);
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      line-height: 0;
+    }
+
+    .hero-art {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      min-height: 0;
+      object-fit: contain;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+
+    .navbar-main {
+      position: absolute;
+      inset: 0 0 auto 0;
+      min-height: var(--nav-h);
+      width: 100%;
+      padding: 14px clamp(16px, 4vw, 52px);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(12px, 2vw, 32px);
+      line-height: 1;
+    }
+
+    .navbar-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(16px, 2.4vw, 34px);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      flex-wrap: nowrap;
+    }
+
+    .navbar-links li {
+      margin: 0;
+      padding: 0;
+      flex: 0 0 auto;
+    }
+
+    .navbar-links a,
+    .navbar-cta,
+    .navbar-toggler-custom {
+      white-space: nowrap;
+    }
+
+    .navbar-cta {
+      flex: 0 0 auto;
+    }
+
+    .navbar-toggler-custom {
+      display: none;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      margin: 0;
+    }
+
+    .hero-content {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: min(560px, 48%);
+      padding: clamp(100px, 12vw, 145px) 6% 4%;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      box-sizing: border-box;
+      line-height: 1.5;
+    }
+
+    .hero-content h1,
+    .hero-content p,
+    .hero-content a,
+    .hero-content span {
+      line-height: normal;
+    }
+
+    .mobile-nav-menu {
+      top: var(--nav-h);
+      left: 16px;
+      right: 16px;
+      width: auto;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 1199.98px) {
+      .navbar-main {
+        padding-left: 28px;
+        padding-right: 28px;
+      }
+      .navbar-links {
+        gap: 20px;
+      }
+      .navbar-links a {
+        font-size: .8rem;
+      }
+    }
+
+    @media (max-width: 991.98px) {
+      .navbar-main {
+        min-height: var(--nav-h);
+        padding: 12px 24px;
+        justify-content: flex-end;
+      }
+
+      .navbar-links,
+      .navbar-cta {
+        display: none !important;
+      }
+
+      .navbar-toggler-custom {
+        display: flex !important;
+      }
+
+      .hero-content {
+        width: 100%;
+        padding: 18% 7% 7%;
+        justify-content: flex-end;
+        background: linear-gradient(180deg, transparent 25%, rgba(4,59,71,.15) 45%, rgba(4,59,71,.78) 100%);
+      }
+
+      .hero-content h1 {
+        max-width: 680px;
+        font-size: clamp(2rem, 5.5vw, 3rem);
+      }
+
+      .hero-content .hero-desc {
+        max-width: 620px;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .hero-content {
+        padding: 22% 6% 6%;
+      }
+
+      .hero-content h1 {
+        margin-bottom: 12px;
+        font-size: clamp(1.75rem, 7vw, 2.5rem);
+      }
+
+      .hero-content .hero-desc {
+        font-size: .9rem;
+        line-height: 1.45;
+        margin-bottom: 18px;
+      }
+
+      .hero-cta {
+        padding: 11px 18px;
+        font-size: .76rem;
+      }
+    }
 
     @media (max-width: 575.98px) {
-
       :root {
         --lang-bar-h: 38px;
+        --nav-h: 64px;
       }
 
       .lang-topbar {
-        padding: 0 12px;
+        height: var(--lang-bar-h);
+        padding: 0 10px;
       }
 
-      .lang-switcher .lang-toggle {
-        padding: 5px 11px 5px 6px;
-        gap: 6px;
+      .navbar-main {
+        min-height: var(--nav-h);
+        padding: 9px 14px;
       }
 
-      .lang-switcher .lang-toggle .lang-icon {
-        width: 19px;
-        height: 19px;
-        font-size: 10px;
+      .navbar-toggler-custom {
+        width: 40px;
+        height: 40px;
       }
 
-      .lang-switcher .lang-toggle .lang-current {
-        font-size: 0.72rem;
+      .hero-content {
+        padding: 18% 7% 7%;
+        justify-content: flex-end;
       }
 
-      .lang-switcher .lang-menu {
-        min-width: 148px;
+      .hero-content h1 {
+        font-size: clamp(1.45rem, 7.8vw, 2.1rem);
+        margin-bottom: 12px;
       }
+
+      .hero-content .hero-desc {
+        display: none !important;
+      }
+
+      .hero-cta {
+        padding: 10px 14px;
+        font-size: .7rem;
+      }
+
+      .mobile-nav-menu {
+        left: 12px;
+        right: 12px;
+        top: calc(var(--nav-h) - 2px);
+      }
+    }
+
+    @media (max-width: 380px) {
+      .hero-content {
+        padding-bottom: 5%;
+      }
+      .hero-content h1 {
+        font-size: 1.35rem;
+      }
+      .hero-cta {
+        padding: 8px 12px;
+      }
+    }
+
+    html[dir="rtl"] .hero-content {
+      left: 0;
+      right: auto;
+      text-align: left;
     }
   </style>
 
@@ -477,7 +1090,6 @@
 
 <!-- ============================================================
      HERO
-     DO NOT CHANGE
      ============================================================ -->
 
 <header class="hero" id="home">
@@ -485,65 +1097,142 @@
   <img
     class="hero-art"
     src="assets/qten-home-reference.png"
-    data-en-src="assets/qten-home-reference.png"
-    data-ar-src="assets/arabic.png"
     alt="Q-TEN Trading & General Services homepage"
   >
 
-  <nav
-    class="hero-links"
-    aria-label="Main navigation"
-  >
+  <div class="hero-overlay" aria-hidden="true"></div>
 
-    <a
-      href="#home"
-      class="home-link"
-      aria-label="Home">
-    </a>
+  <!-- Visible top navigation -->
 
-    <a
-      href="#about"
-      class="about-link"
-      aria-label="About Us">
-    </a>
+  <nav class="navbar-main" aria-label="Main navigation">
 
-    <a
-      href="#services"
-      class="services-link"
-      aria-label="Services">
-    </a>
+    <ul class="navbar-links">
 
-    <a
-      href="#industries"
-      class="industries-link"
-      aria-label="Industries">
-    </a>
+      <li>
+        <a
+          href="#home"
+          class="active"
+          data-en="Home"
+          data-ar="الرئيسية"
+        >Home</a>
+      </li>
 
-    <a
-      href="#why-us"
-      class="why-link"
-      aria-label="Why Us">
-    </a>
+      <li>
+        <a
+          href="#about"
+          data-en="About Us"
+          data-ar="من نحن"
+        >About Us</a>
+      </li>
+
+      <li>
+        <a
+          href="#services"
+          data-en="Services"
+          data-ar="الخدمات"
+        >Services</a>
+      </li>
+
+      <li>
+        <a
+          href="#industries"
+          data-en="Industries"
+          data-ar="مجالات الخدمة"
+        >Industries</a>
+      </li>
+
+      <li>
+        <a
+          href="#why-us"
+          data-en="Why Us"
+          data-ar="لماذا كيو-تين"
+        >Why Us</a>
+      </li>
+
+      <li>
+        <a
+          href="#contact"
+          data-en="Contact Us"
+          data-ar="تواصل معنا"
+        >Contact Us</a>
+      </li>
+
+    </ul>
 
     <a
       href="#contact"
-      class="contact-link"
-      aria-label="Contact Us">
+      class="navbar-cta"
+      data-en="Get a Quote"
+      data-ar="اطلب عرض سعر"
+    >
+      Get a Quote
     </a>
 
-    <a
-      href="#contact"
-      class="quote-link"
-      aria-label="Get a Quote">
-    </a>
-
-    <a
-      href="#services"
-      class="explore-link"
-      aria-label="Explore Our Services">
-    </a>
+    <button
+      type="button"
+      class="navbar-toggler-custom"
+      id="mobileNavToggle"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+    >
+      <i class="bi bi-list"></i>
+    </button>
 
   </nav>
+
+  <!-- Mobile dropdown menu -->
+
+  <div class="mobile-nav-menu" id="mobileNavMenu">
+
+    <a href="#home" data-en="Home" data-ar="الرئيسية">Home</a>
+    <a href="#about" data-en="About Us" data-ar="من نحن">About Us</a>
+    <a href="#services" data-en="Services" data-ar="الخدمات">Services</a>
+    <a href="#industries" data-en="Industries" data-ar="مجالات الخدمة">Industries</a>
+    <a href="#why-us" data-en="Why Us" data-ar="لماذا كيو-تين">Why Us</a>
+    <a href="#contact" data-en="Contact Us" data-ar="تواصل معنا">Contact Us</a>
+    <a href="#contact" class="mobile-quote" data-en="Get a Quote" data-ar="اطلب عرض سعر">Get a Quote</a>
+
+  </div>
+
+  <!-- Hero headline / copy -->
+
+  <div class="hero-content" dir="ltr">
+
+    <h1>
+      <span
+        data-en="Reliable Solutions."
+        data-ar="حلول موثوقة."
+      >Reliable Solutions.</span>
+      <span
+        class="accent-line"
+        data-en="Real Results."
+        data-ar="نتائج حقيقية."
+      >Real Results.</span>
+    </h1>
+
+    <p
+      class="hero-desc"
+      data-en="Q-TEN Trading & General Services delivers trusted trading and general services solutions tailored to your business needs."
+      data-ar="تقدم كيو-تين للتجارة والخدمات العامة حلول تجارة وخدمات عامة موثوقة ومصممة خصيصًا لاحتياجات أعمالكم."
+    >
+      Q-TEN Trading & General Services delivers trusted trading
+      and general services solutions tailored to your business
+      needs.
+    </p>
+
+    <a
+      href="#services"
+      class="hero-cta"
+      data-en="Explore Our Services"
+      data-ar="استكشف خدماتنا"
+    >
+      Explore Our Services
+      <i class="bi bi-arrow-right" aria-hidden="true"></i>
+    </a>
+
+  </div>
+
+  <!-- Hero anchor overlays removed: real navbar links are used. -->
 
 </header>
 
@@ -2582,88 +3271,41 @@
         </p>
 
 
-        <div class="contact-details">
+       <div class="contact-details">
 
-          <div>
+  <div>
+    <i class="bi bi-geo-alt"></i>
+    <span>
+      <strong data-en="Location:" data-ar="الموقع:">Location:</strong>
+      Doha, Qatar
+    </span>
+  </div>
 
-            <i class="bi bi-geo-alt"></i>
+  <div>
+    <i class="bi bi-telephone"></i>
+    <span>
+      <strong data-en="Tel:" data-ar="هاتف:">Tel:</strong>
+      <span class="ltr-fixed">+974 335 666 10</span>
+    </span>
+  </div>
 
-            <span>
+  <div>
+    <i class="bi bi-telephone"></i>
+    <span>
+      <strong data-en="Tel:" data-ar="هاتف:">Tel:</strong>
+      <span class="ltr-fixed">+974 665 22 188</span>
+    </span>
+  </div>
 
-              <strong
-                data-en="Location:"
-                data-ar="الموقع:"
-              >
-                Location:
-              </strong>
+  <div>
+    <i class="bi bi-envelope"></i>
+    <span>
+      <strong data-en="Email:" data-ar="البريد الإلكتروني:">Email:</strong>
+      <span class="ltr-fixed">Q10qatar@gmail.com</span>
+    </span>
+  </div>
 
-              Doha, Qatar
-
-            </span>
-
-          </div>
-
-
-          <div>
-
-            <i class="bi bi-telephone"></i>
-
-            <span>
-
-              <strong
-                data-en="Tel:"
-                data-ar="هاتف:"
-              >
-                Tel:
-              </strong>
-
-              +974 335 666 10
-
-            </span>
-
-          </div>
-
-
-          <div>
-
-            <i class="bi bi-telephone"></i>
-
-            <span>
-
-              <strong
-                data-en="Tel:"
-                data-ar="هاتف:"
-              >
-                Tel:
-              </strong>
-
-              +974 665 22 188
-
-            </span>
-
-          </div>
-
-
-          <div>
-
-            <i class="bi bi-envelope"></i>
-
-            <span>
-
-              <strong
-                data-en="Email:"
-                data-ar="البريد الإلكتروني:"
-              >
-                Email:
-              </strong>
-
-              Q10qatar@gmail.com
-
-            </span>
-
-          </div>
-
-        </div>
+</div>
 
 
         <!-- ========================================================
@@ -3060,10 +3702,9 @@
   id="backTop"
   class="back-top"
   aria-label="Back to top"
+  type="button"
 >
-
   <i class="bi bi-arrow-up"></i>
-
 </button>
 
 
@@ -3153,7 +3794,7 @@
 
 
 <!-- ============================================================
-     LANGUAGE SWITCHER + ENQUIRY FORM AJAX
+     LANGUAGE SWITCHER + MOBILE NAV + ENQUIRY FORM AJAX
      ============================================================ -->
 
 <script>
@@ -3254,24 +3895,12 @@
       });
 
 
-    /* Hero image */
-
-    document
-      .querySelectorAll('[data-en-src]')
-      .forEach(function (el) {
-
-        var src = isArabic
-          ? el.getAttribute('data-ar-src')
-          : el.getAttribute('data-en-src');
-
-        if (src) {
-          el.setAttribute(
-            'src',
-            src
-          );
-        }
-
-      });
+    /*
+     * NOTE: Hero image is intentionally NOT swapped when the
+     * language changes. The same hero image (qten-home-reference.png)
+     * stays in place for both English and Arabic — only the text
+     * content, placeholders, and page direction change.
+     */
 
 
     /* Language buttons */
@@ -3388,6 +4017,54 @@
   } catch (e) {}
 
   applyLanguage(savedLang);
+
+
+  /* ==========================================================
+     MOBILE NAV TOGGLE
+     ========================================================== */
+
+  var mobileToggle = document.getElementById('mobileNavToggle');
+  var mobileMenu = document.getElementById('mobileNavMenu');
+
+  if (mobileToggle && mobileMenu) {
+
+    mobileToggle.addEventListener('click', function (event) {
+
+      event.stopPropagation();
+
+      var isOpen = mobileMenu.classList.toggle('open');
+
+      mobileToggle.setAttribute(
+        'aria-expanded',
+        isOpen ? 'true' : 'false'
+      );
+
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(function (link) {
+
+      link.addEventListener('click', function () {
+
+        mobileMenu.classList.remove('open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+
+      });
+
+    });
+
+    document.addEventListener('click', function (event) {
+
+      if (
+        !mobileMenu.contains(event.target) &&
+        !mobileToggle.contains(event.target)
+      ) {
+        mobileMenu.classList.remove('open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+      }
+
+    });
+
+  }
 
 
   /* ==========================================================

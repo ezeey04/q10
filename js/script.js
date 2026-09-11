@@ -58,15 +58,19 @@ document.addEventListener("DOMContentLoaded", () => {
         message.textContent = result.message || "Something went wrong. Please try again.";
       }
 
-    catch (error) {
-    formMessage.textContent = error.message || 'Unknown error';
-    console.error(error);
-        
-    }
+    } catch (error) {
+
+      message.classList.add("is-error");
+      message.textContent = error.message || "Unknown error";
+      console.error(error);
+
+    } finally {
+
       if (submitBtn) {
         submitBtn.disabled = false;
         submitBtn.textContent = originalBtnText;
       }
+
     }
 
   });

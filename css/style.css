@@ -26,6 +26,11 @@
 
   --radius:20px;
 }
+.ltr-fixed {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-block;
+}
 
 
 /* ============================================================
@@ -1401,6 +1406,11 @@ h2{
   box-shadow:var(--shadow-sm);
 }
 
+/*
+  Why Us icon background — updated to a formal, muted
+  light gray-blue tone instead of the bright teal-light
+  fill used elsewhere, for a more corporate feel.
+*/
 .reason i{
   width:43px;
   height:43px;
@@ -1417,7 +1427,8 @@ h2{
 
   color:var(--qten-teal);
 
-  background:var(--qten-teal-light);
+  background:#eef2f4;
+  border:1px solid #dde5e8;
 }
 
 
