@@ -2161,3 +2161,22 @@ h2{
     padding:11px 3px;
   }
 }
+
+/* ============================================================
+   PERFORMANCE OPTIMIZATION
+   ============================================================ */
+.value-strip,
+.about-section,
+.services-section,
+.industries-section,
+.why-section,
+.contact-section,
+footer.footer {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+}
+
+.hero,
+.hero-art {
+  content-visibility: visible;
+}
