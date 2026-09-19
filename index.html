@@ -60,32 +60,58 @@
         content="Company registration, PRO Support Service, translation, attestation and business support in Qatar.">
   <meta name="twitter:image" content="https://qtenservice.com/assets/qten-home-reference.webp">
 
+  <!-- Keep preconnects limited to the origins needed early. -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Bootstrap -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  >
-
-  <!-- Bootstrap Icons -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-    rel="stylesheet"
-  >
-
-  <!-- Arabic font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+  <!-- Bootstrap CSS: required for the existing layout/components. -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet"
+    fetchpriority="high"
   >
 
+  <!-- Bootstrap Icons: non-critical for first paint, load without blocking rendering. -->
+  <link
+    rel="preload"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  >
+  <noscript>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    >
+  </noscript>
+
+  <!-- Arabic font: English is the default, so don't block the first render. -->
+  <link
+    rel="preload"
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  >
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    >
+  </noscript>
+
   <!-- Q-TEN Stylesheet -->
-  <link href="css/style.css" rel="stylesheet">
+  <link
+    rel="preload"
+    href="css/style.css"
+    as="style"
+    fetchpriority="high"
+  >
+  <link
+    href="css/style.css"
+    rel="stylesheet"
+    fetchpriority="high"
+  >
 
   <!-- ============================================================
        LANGUAGE SWITCHER + NAVBAR + HERO STYLES
@@ -1026,6 +1052,33 @@
       right: auto;
       text-align: left;
     }
+
+    /* Performance/accessibility helpers */
+    .value-title {
+      margin-top: 0;
+      margin-bottom: .5rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .supplied-logo {
+      display: block;
+      width: min(100%, 512px);
+      height: auto;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+    }
+
+    /* Keep below-the-fold rendering lighter without changing layout. */
+    @media (min-width: 992px) {
+      .value-strip,
+      .about-section,
+      .formation-section,
+      .services-section {
+        content-visibility: auto;
+        contain-intrinsic-size: 700px;
+      }
+    }
   </style>
 
 </head>
@@ -1053,7 +1106,7 @@
     >
 
       <span class="lang-icon" aria-hidden="true">
-        <i class="bi bi-globe2"></i>
+        <i class="bi bi-globe2" aria-hidden="true"></i>
       </span>
 
       <span
@@ -1067,7 +1120,7 @@
         class="lang-chevron"
         aria-hidden="true"
       >
-        <i class="bi bi-chevron-down"></i>
+        <i class="bi bi-chevron-down" aria-hidden="true"></i>
       </span>
 
     </button>
@@ -1091,7 +1144,7 @@
 
           <span>English</span>
 
-          <i class="bi bi-check-lg lang-check"></i>
+          <i class="bi bi-check-lg lang-check" aria-hidden="true"></i>
 
         </button>
 
@@ -1110,7 +1163,7 @@
 
           <span>العربية</span>
 
-          <i class="bi bi-check-lg lang-check"></i>
+          <i class="bi bi-check-lg lang-check" aria-hidden="true"></i>
 
         </button>
 
@@ -1230,14 +1283,14 @@
       aria-label="Toggle navigation menu"
       aria-expanded="false"
     >
-      <i class="bi bi-list"></i>
+      <i class="bi bi-list" aria-hidden="true"></i>
     </button>
 
   </nav>
 
   <!-- Mobile dropdown menu -->
 
-  <div class="mobile-nav-menu" id="mobileNavMenu">
+  <nav class="mobile-nav-menu" id="mobileNavMenu" aria-label="Mobile navigation">
 
     <a href="#home" data-en="Home" data-ar="الرئيسية">Home</a>
     <a href="#about" data-en="About Us" data-ar="من نحن">About Us</a>
@@ -1247,7 +1300,7 @@
     <a href="#contact" data-en="Contact Us" data-ar="تواصل معنا">Contact Us</a>
     <a href="#contact" class="mobile-quote" data-en="Get a Quote" data-ar="اطلب عرض سعر">Get a Quote</a>
 
-  </div>
+  </nav>
 
   <!-- Hero headline / copy -->
 
@@ -1292,6 +1345,8 @@
 </header>
 
 
+<main id="main-content">
+
 <!-- ============================================================
      VALUE STRIP
      ============================================================ -->
@@ -1306,16 +1361,16 @@
 
         <div class="value-item">
 
-          <i class="bi bi-building"></i>
+          <i class="bi bi-building" aria-hidden="true"></i>
 
           <div>
 
-            <h3
+            <div class="value-title h3"
               data-en="Company Formation"
               data-ar="تسجيل الشركات"
             >
               Company Registration
-            </h3>
+            </div>
 
             <p
               data-en="Assistance with company formation and registration requirements in Qatar."
@@ -1336,16 +1391,16 @@
 
         <div class="value-item">
 
-          <i class="bi bi-file-earmark-text"></i>
+          <i class="bi bi-file-earmark-text" aria-hidden="true"></i>
 
           <div>
 
-            <h3
+            <div class="value-title h3"
               data-en="Documentation Services"
               data-ar="خدمات المستندات"
             >
               Document Services
-            </h3>
+            </div>
 
             <p
               data-en="Translation, attestation and documentation support for individuals and businesses."
@@ -1366,16 +1421,16 @@
 
         <div class="value-item">
 
-          <i class="bi bi-person-badge"></i>
+          <i class="bi bi-person-badge" aria-hidden="true"></i>
 
           <div>
 
-            <h3
+            <div class="value-title h3"
               data-en="PRO Support Service"
               data-ar="خدمات العلاقات العامة (PRO)"
             >
               PRO Support Service
-            </h3>
+            </div>
 
             <p
               data-en="Professional public relations and government-service assistance in Qatar."
@@ -1396,16 +1451,16 @@
 
         <div class="value-item">
 
-          <i class="bi bi-people"></i>
+          <i class="bi bi-people" aria-hidden="true"></i>
 
           <div>
 
-            <h3
+            <div class="value-title h3"
               data-en="Business Support"
               data-ar="دعم الأعمال"
             >
               Business Support
-            </h3>
+            </div>
 
             <p
               data-en="Support for both small and large enterprises and legal entities."
@@ -1494,7 +1549,7 @@
             Contact Q-TEN
           </span>
 
-          <i class="bi bi-arrow-right ms-2"></i>
+          <i class="bi bi-arrow-right ms-2" aria-hidden="true"></i>
 
         </a>
 
@@ -1509,7 +1564,11 @@
             src="assets/qten-supplied-logo.png"
             alt="Q-TEN Trading & General Services logo - Doha, Qatar"
             class="supplied-logo"
+            width="512"
+            height="512"
             loading="lazy"
+            decoding="async"
+            fetchpriority="low"
           >
 
         </div>
@@ -1861,7 +1920,7 @@
         <article class="service-card">
 
           <div class="service-icon">
-            <i class="bi bi-building-add"></i>
+            <i class="bi bi-building-add" aria-hidden="true"></i>
           </div>
 
           <h3
@@ -1929,7 +1988,7 @@
         <article class="service-card">
 
           <div class="service-icon">
-            <i class="bi bi-translate"></i>
+            <i class="bi bi-translate" aria-hidden="true"></i>
           </div>
 
           <h3
@@ -1997,7 +2056,7 @@
         <article class="service-card">
 
           <div class="service-icon">
-            <i class="bi bi-person-vcard"></i>
+            <i class="bi bi-person-vcard" aria-hidden="true"></i>
           </div>
 
           <h3
@@ -2065,7 +2124,7 @@
         <article class="service-card">
 
           <div class="service-icon">
-            <i class="bi bi-briefcase"></i>
+            <i class="bi bi-briefcase" aria-hidden="true"></i>
           </div>
 
           <h3
@@ -2133,7 +2192,7 @@
         <article class="service-card">
 
           <div class="service-icon">
-            <i class="bi bi-credit-card"></i>
+            <i class="bi bi-credit-card" aria-hidden="true"></i>
           </div>
 
           <h3
@@ -2201,7 +2260,7 @@
         <article class="service-card">
 
           <div class="service-icon">
-            <i class="bi bi-car-front"></i>
+            <i class="bi bi-car-front" aria-hidden="true"></i>
           </div>
 
           <h3
@@ -2921,7 +2980,7 @@
 
         <div class="industry">
 
-          <i class="bi bi-building"></i>
+          <i class="bi bi-building" aria-hidden="true"></i>
 
           <span
             data-en="Company Formation"
@@ -2939,7 +2998,7 @@
 
         <div class="industry">
 
-          <i class="bi bi-file-earmark-text"></i>
+          <i class="bi bi-file-earmark-text" aria-hidden="true"></i>
 
           <span
             data-en="Documents & Translation"
@@ -2957,7 +3016,7 @@
 
         <div class="industry">
 
-          <i class="bi bi-person-badge"></i>
+          <i class="bi bi-person-badge" aria-hidden="true"></i>
 
           <span
             data-en="PRO Support Service"
@@ -2975,7 +3034,7 @@
 
         <div class="industry">
 
-          <i class="bi bi-passport"></i>
+          <i class="bi bi-passport" aria-hidden="true"></i>
 
           <span
             data-en="Visa Services"
@@ -2993,7 +3052,7 @@
 
         <div class="industry">
 
-          <i class="bi bi-briefcase"></i>
+          <i class="bi bi-briefcase" aria-hidden="true"></i>
 
           <span
             data-en="Employment Services"
@@ -3011,7 +3070,7 @@
 
         <div class="industry">
 
-          <i class="bi bi-car-front"></i>
+          <i class="bi bi-car-front" aria-hidden="true"></i>
 
           <span
             data-en="Traffic Services"
@@ -3029,7 +3088,7 @@
 
         <div class="industry">
 
-          <i class="bi bi-patch-check"></i>
+          <i class="bi bi-patch-check" aria-hidden="true"></i>
 
           <span
             data-en="Attestation"
@@ -3047,7 +3106,7 @@
 
         <div class="industry">
 
-          <i class="bi bi-credit-card"></i>
+          <i class="bi bi-credit-card" aria-hidden="true"></i>
 
           <span
             data-en="Online Bill Payment"
@@ -3113,7 +3172,7 @@
 
         <div class="reason">
 
-          <i class="bi bi-check2-circle"></i>
+          <i class="bi bi-check2-circle" aria-hidden="true"></i>
 
           <span
             data-en="All-in-one business service support"
@@ -3131,7 +3190,7 @@
 
         <div class="reason">
 
-          <i class="bi bi-check2-circle"></i>
+          <i class="bi bi-check2-circle" aria-hidden="true"></i>
 
           <span
             data-en="Company Formation and business setup assistance"
@@ -3149,7 +3208,7 @@
 
         <div class="reason">
 
-          <i class="bi bi-check2-circle"></i>
+          <i class="bi bi-check2-circle" aria-hidden="true"></i>
 
           <span
             data-en="Professional PRO and government-service assistance"
@@ -3167,7 +3226,7 @@
 
         <div class="reason">
 
-          <i class="bi bi-check2-circle"></i>
+          <i class="bi bi-check2-circle" aria-hidden="true"></i>
 
           <span
             data-en="Translation, attestation and document support"
@@ -3185,7 +3244,7 @@
 
         <div class="reason">
 
-          <i class="bi bi-check2-circle"></i>
+          <i class="bi bi-check2-circle" aria-hidden="true"></i>
 
           <span
             data-en="Personal and corporate service options"
@@ -3203,7 +3262,7 @@
 
         <div class="reason">
 
-          <i class="bi bi-check2-circle"></i>
+          <i class="bi bi-check2-circle" aria-hidden="true"></i>
 
           <span
             data-en="Support for new and existing businesses"
@@ -3272,7 +3331,7 @@
           Talk to Q-TEN
         </span>
 
-        <i class="bi bi-arrow-right ms-2"></i>
+        <i class="bi bi-arrow-right ms-2" aria-hidden="true"></i>
 
       </a>
 
@@ -3329,7 +3388,7 @@
        <div class="contact-details">
 
   <div>
-    <i class="bi bi-geo-alt"></i>
+    <i class="bi bi-geo-alt" aria-hidden="true"></i>
     <span>
       <strong data-en="Location:" data-ar="الموقع:">Location:</strong>
       Doha, Qatar
@@ -3337,7 +3396,7 @@
   </div>
 
   <div>
-    <i class="bi bi-telephone"></i>
+    <i class="bi bi-telephone" aria-hidden="true"></i>
     <span>
       <strong data-en="Tel:" data-ar="هاتف:">Tel:</strong>
       <span class="ltr-fixed">+974 335 666 10</span>
@@ -3345,7 +3404,7 @@
   </div>
 
   <div>
-    <i class="bi bi-telephone"></i>
+    <i class="bi bi-telephone" aria-hidden="true"></i>
     <span>
       <strong data-en="Tel:" data-ar="هاتف:">Tel:</strong>
       <span class="ltr-fixed">+974 665 22 188</span>
@@ -3353,7 +3412,7 @@
   </div>
 
   <div>
-    <i class="bi bi-envelope"></i>
+    <i class="bi bi-envelope" aria-hidden="true"></i>
     <span>
       <strong data-en="Email:" data-ar="البريد الإلكتروني:">Email:</strong>
       <span class="ltr-fixed">Q10qatar@gmail.com</span>
@@ -3375,7 +3434,7 @@
             rel="noopener"
             aria-label="Instagram"
           >
-            <i class="bi bi-instagram"></i>
+            <i class="bi bi-instagram" aria-hidden="true"></i>
             <span>Instagram</span>
           </a>
 
@@ -3385,7 +3444,7 @@
             rel="noopener"
             aria-label="Facebook"
           >
-            <i class="bi bi-facebook"></i>
+            <i class="bi bi-facebook" aria-hidden="true"></i>
             <span>Facebook</span>
           </a>
 
@@ -3395,7 +3454,7 @@
             rel="noopener"
             aria-label="Location"
           >
-            <i class="bi bi-geo-alt"></i>
+            <i class="bi bi-geo-alt" aria-hidden="true"></i>
             <span data-en="Doha, Qatar" data-ar="الدوحة، قطر">Doha, Qatar</span>
           </a>
 
@@ -3420,7 +3479,10 @@
         novalidate
       >
 
+        <label class="visually-hidden" for="quoteName" data-en="Your name" data-ar="اسمك">Your name</label>
         <input
+          id="quoteName"
+          type="text"
           class="form-control"
           name="name"
           placeholder="Your name"
@@ -3431,7 +3493,9 @@
         >
 
 
+        <label class="visually-hidden" for="quoteEmail" data-en="Email address" data-ar="البريد الإلكتروني">Email address</label>
         <input
+          id="quoteEmail"
           class="form-control"
           name="email"
           type="email"
@@ -3443,7 +3507,10 @@
         >
 
 
+        <label class="visually-hidden" for="quotePhone" data-en="Phone number" data-ar="رقم الهاتف">Phone number</label>
         <input
+          id="quotePhone"
+          type="tel"
           class="form-control"
           name="phone"
           placeholder="Phone number"
@@ -3453,7 +3520,9 @@
         >
 
 
+        <label class="visually-hidden" for="quoteService" data-en="Select a service" data-ar="اختر خدمة">Select a service</label>
         <select
+          id="quoteService"
           class="form-control"
           name="service"
           required
@@ -3534,7 +3603,9 @@
         </select>
 
 
+        <label class="visually-hidden" for="quoteMessage" data-en="Tell us about your requirement" data-ar="أخبرنا عن متطلباتك">Tell us about your requirement</label>
         <textarea
+          id="quoteMessage"
           class="form-control"
           name="message"
           rows="5"
@@ -3594,6 +3665,9 @@
 </section>
 
 
+</main>
+
+
 <!-- ============================================================
      FOOTER
      ============================================================ -->
@@ -3630,7 +3704,7 @@
             rel="noopener"
             aria-label="Instagram"
           >
-            <i class="bi bi-instagram"></i>
+            <i class="bi bi-instagram" aria-hidden="true"></i>
           </a>
 
           <a
@@ -3639,7 +3713,7 @@
             rel="noopener"
             aria-label="Facebook"
           >
-            <i class="bi bi-facebook"></i>
+            <i class="bi bi-facebook" aria-hidden="true"></i>
           </a>
 
           <a
@@ -3648,7 +3722,7 @@
             rel="noopener"
             aria-label="Location"
           >
-            <i class="bi bi-geo-alt"></i>
+            <i class="bi bi-geo-alt" aria-hidden="true"></i>
           </a>
 
         </div>
@@ -3759,15 +3833,8 @@
   aria-label="Back to top"
   type="button"
 >
-  <i class="bi bi-arrow-up"></i>
+  <i class="bi bi-arrow-up" aria-hidden="true"></i>
 </button>
-
-
-<!-- Bootstrap JS -->
-
-<script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-</script>
 
 
 <!-- Q-TEN Website JS -->

@@ -13,7 +13,7 @@
   --qten-dark-2:#062f39;
 
   --qten-text:#48656d;
-  --qten-muted:#70878d;
+  --qten-muted:#526c74;
 
   --qten-bg:#f4fafb;
   --qten-line:#d8eaed;
@@ -461,7 +461,7 @@ h2{
 }
 
 .about-section p:not(.lead){
-  color:#688087;
+  color:#4f6b73;
 }
 
 .brand-card{
@@ -689,7 +689,7 @@ h2{
 
 .info-card p,
 .category-card p{
-  color:#617a81;
+  color:#4f6b73;
 }
 
 .info-card ul,
@@ -703,7 +703,7 @@ h2{
 .category-card li{
   margin-bottom:7px;
 
-  color:#5c747b;
+  color:#526c74;
 }
 
 
@@ -787,7 +787,7 @@ h2{
 .service-card li{
   margin-bottom:7px;
 
-  color:#5c747b;
+  color:#526c74;
 }
 
 
@@ -966,7 +966,7 @@ h2{
 
   margin:0 0 20px;
 
-  color:#6b8288;
+  color:#526c74;
 
   font-size:14px;
 
@@ -1013,7 +1013,7 @@ h2{
     1px solid rgba(8,127,140,.09);
 
   transition:
-    padding-left .25s ease,
+    transform .25s ease,
     color .25s ease;
 }
 
@@ -1066,8 +1066,7 @@ h2{
 }
 
 .category-card li:hover{
-  padding-left:5px;
-
+  transform:translateX(5px);
   color:var(--qten-dark);
 }
 
@@ -1721,7 +1720,7 @@ h2{
 .footer-top span{
   font-size:12px;
 
-  color:rgba(255,255,255,.52);
+  color:rgba(255,255,255,.68);
 }
 
 .footer-links{
@@ -1764,7 +1763,7 @@ h2{
 
   font-size:12px;
 
-  color:rgba(255,255,255,.48);
+  color:rgba(255,255,255,.72);
 }
 
 
@@ -2163,20 +2162,85 @@ h2{
 }
 
 /* ============================================================
-   PERFORMANCE OPTIMIZATION
+   PAGE SPEED + ACCESSIBILITY OPTIMIZATION
    ============================================================ */
-.value-strip,
-.about-section,
-.services-section,
-.industries-section,
-.why-section,
-.contact-section,
-footer.footer {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 700px;
+
+/* Keep decorative/visual animations on compositor-friendly
+   properties whenever possible. */
+.value-item,
+.value-item > i,
+.info-card,
+.category-card,
+.service-card,
+.service-icon,
+.industry,
+.reason,
+.qten-btn,
+.back-top,
+.category-card .card-link {
+  will-change: auto;
 }
 
-.hero,
-.hero-art {
-  content-visibility: visible;
+/* Prevent unnecessary rendering work for lower-page sections
+   on larger screens while preserving layout dimensions. */
+@media (min-width: 992px) {
+  .value-strip,
+  .about-section,
+  .formation-section,
+  .services-section,
+  .industries-section,
+  .why-section,
+  .cta-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 700px;
+  }
+}
+
+/* Accessibility: visible keyboard focus. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #72e0e7;
+  outline-offset: 3px;
+}
+
+/* Accessibility: form labels are visually hidden in the HTML,
+   but remain available to screen readers. */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Respect users who request reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Small-screen performance: avoid expensive backdrop filtering. */
+@media (max-width: 767px) {
+  .contact-form,
+  .mobile-nav {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }
